@@ -330,16 +330,27 @@ function stackTerrain()
   end
 end
 
+-- В каждой колоде ночей остаётся 3 карты: ровно одна Угроза и две обычные
 function trimNightDecks()
   for idx, info in ipairs(NIGHT_DECKS) do
     local deck = getObjectFromGUID(info.guid)
     if deck ~= nil then
       deck.shuffle()
-      local extra = deck.getQuantity() - 3
-      for j = 1, extra do
-        deck.takeObject({position = {OUT_POS[1], OUT_POS[2] + idx * 0.6 + j * 0.15, OUT_POS[3] - idx * 3.5},
-                         rotation = {0, 180, 180}, smooth = false})
+      local keep, threat, normal = {}, 0, 0
+      for _, c in ipairs(deck.getObjects()) do
+        local isThreat = string.find(c.description or "", "УГРОЗА", 1, true) ~= nil
+        if isThreat and threat < 1 then threat = threat + 1; keep[c.guid] = true
+        elseif (not isThreat) and normal < 2 then normal = normal + 1; keep[c.guid] = true end
       end
+      local j = 0
+      for _, c in ipairs(deck.getObjects()) do
+        if not keep[c.guid] then
+          j = j + 1
+          deck.takeObject({guid = c.guid, position = {OUT_POS[1], OUT_POS[2] + idx * 0.6 + j * 0.15, OUT_POS[3] - idx * 3.5},
+                           rotation = {0, 180, 180}, smooth = false})
+        end
+      end
+      Wait.frames(function() local d = getObjectFromGUID(info.guid); if d ~= nil then d.shuffle() end end, 5)
       deck.setName(info.name)
     end
   end

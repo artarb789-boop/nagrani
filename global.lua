@@ -13,11 +13,13 @@ local NIGHT_DECKS = {
   {guid = "2025e0",  name = "Ночи 7–9"},
 }
 local OUT_POS = {33, 1.5, 0}
-local BOARD_JSON = [==[{"GUID": "", "Name": "Custom_Board", "Transform": {"posX": 0, "posY": 1, "posZ": 0, "rotX": 0, "rotY": 180, "rotZ": 0, "scaleX": 0.22, "scaleY": 0.22, "scaleZ": 0.22}, "Nickname": "Планшет игрока", "Description": "", "GMNotes": "", "ColorDiffuse": {"r": 1, "g": 1, "b": 1}, "Locked": false, "Grid": false, "Snap": true, "Autoraise": true, "Sticky": true, "Tooltip": true, "GridProjection": false, "Hands": false, "LuaScript": "", "LuaScriptState": "", "CustomImage": {"ImageURL": "file:///C:/NaGrani/images/player_board.png", "ImageSecondaryURL": "", "ImageScalar": 1.0, "WidthScale": 0.0}}]==]
+local BOARD_JSON = [==[{"GUID": "", "Name": "Custom_Board", "Transform": {"posX": 0, "posY": 1, "posZ": 0, "rotX": 0, "rotY": 180, "rotZ": 0, "scaleX": 0.394, "scaleY": 0.394, "scaleZ": 0.394}, "Nickname": "Планшет игрока", "Description": "", "GMNotes": "", "ColorDiffuse": {"r": 1, "g": 1, "b": 1}, "Locked": false, "Grid": false, "Snap": true, "Autoraise": true, "Sticky": true, "Tooltip": true, "GridProjection": false, "Hands": false, "LuaScript": "", "LuaScriptState": "", "CustomImage": {"ImageURL": "file:///C:/NaGrani/images/player_board.png", "ImageSecondaryURL": "", "ImageScalar": 1.0, "WidthScale": 0.0}}]==]
 local BOARD_Z = -14
 local BOARD_GAP = 19
 -- Смещения от центра планшета (планшет 17.45 x 6.43, повёрнут на 180): +x вправо, +z к верху планшета
+-- Планшет при масштабе 0.394: 17.45 x 7.2 (замерено в TTS)
 local BOARD_W = 17.45
+local BOARD_H = 7.2
 -- Кубики: смещение по x от центра планшета, над верхним краем
 local DICE_X = {-4.5, -3.5, -2.5, -1.5, -0.5, 0.5}
 -- Маркеры: доли ширины и высоты планшета от центра (+x вправо, +z к верху картинки)
@@ -51,15 +53,6 @@ end
 
 function onLoad(state)
   fitTable()
-  Wait.time(function()
-    local sb = getObjectFromGUID(SHARED)
-    if sb == nil then return end
-    local size = sb.getBounds().size
-    if size.x > 0 and math.abs(size.x - SHARED_W) > 0.1 then
-      local sc = sb.getScale()
-      sb.setScale({sc.x * SHARED_W / size.x, sc.y, sc.z * SHARED_W / size.x})
-    end
-  end, 2)
   if state ~= nil and state ~= "" then
     local ok, d = pcall(function() return JSON.decode(state) end)
     if ok and d ~= nil and d.started then started = true end
@@ -133,19 +126,9 @@ function startSupply(n)
   put("Еда", {0.93, 0.55, 0.2}, 1.5, 2 * n)
 end
 
--- Планшет всегда одной ширины, как бы TTS ни масштабировал картинку
-function fitBoard(o)
-  local size = o.getBounds().size
-  if size.x > 0 and math.abs(size.x - BOARD_W) > 0.05 then
-    local sc = o.getScale()
-    local k = BOARD_W / size.x
-    o.setScale({sc.x * k, sc.y, sc.z * k})
-  end
-end
-
 function piecePositions(o)
   local p = o.getPosition()
-  local size = o.getBounds().size
+  local size = {x = BOARD_W, z = BOARD_H}
   local dice, marks = {}, {}
   for i, dx in ipairs(DICE_X) do dice[i] = {p.x + dx, 2, p.z + size.z / 2 + 1.4} end
   for m, f in ipairs(MARK_F) do marks[m] = {p.x + f[1] * size.x, 2, p.z + f[2] * size.z} end
@@ -187,8 +170,7 @@ function spawnPlayers(n)
       json = BOARD_JSON, position = {x, 1.3, BOARD_Z}, rotation = {0, 180, 0},
       callback_function = function(o)
         o.setName("Планшет: " .. color)
-        fitBoard(o)
-        Wait.frames(function() spawnPieces(o, color) end, 3)
+        spawnPieces(o, color)
       end,
     })
   end

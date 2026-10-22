@@ -68,7 +68,7 @@ def tile_front(t):
     if n == 0:
         body = (f"<div class='h' style='font-size:56px;text-align:center;margin-top:150px'>ЛАГЕРЬ</div>"
                 f"<div style='text-align:center;font-size:22px;margin-top:14px' class='muted'>спортзал школы</div>"
-                f"<div style='text-align:center;font-size:20px;margin-top:60px;padding:0 70px;line-height:1.35'>Сумерки: еда и вода<br>из общего запаса.<br>Баррикады отменяют удары.</div>")
+                f"<div style='text-align:center;font-size:20px;margin-top:60px;padding:0 70px;line-height:1.35'>Сумерки: еда и вода<br>из общего запаса.<br>После 9-й ночи —<br>эвакуация отсюда.</div>")
     else:
         dcol = DISTORTION_COLOR[dist]
         body = f"""
@@ -174,36 +174,40 @@ def token(label, sub, bg, fg="#EDE9DD", ring="#000"):
     return f"""<div style='position:absolute;inset:0;background:{bg};border-radius:28px;border:8px solid {ring}'></div>
       <div style='position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:{fg}'>
       <div class='h' style='font-size:{34 if len(label) < 10 else 26}px;text-align:center'>{e(label)}</div>
-      <div style='font-size:22px;margin-top:6px;opacity:.85'>{e(sub)}</div></div>"""
-TOK_FRONT = [token("Ходячий", "бой 2+ · удар 1", "#5A6B4A"), token("Бегун", "бой 4+ · удар 1 · 2 шага", "#8A6A2E"),
-             token("Броня", "бой 6 · удар 2", "#7A2E24"), token("Труп", "встанет ночью", "#4A4640", ring="#2a2826")]
-TOK_BACK = [token("Бегун", "бой 4+ · удар 1 · 2 шага", "#8A6A2E"), token("Броня", "бой 6 · удар 2", "#7A2E24"),
-            token("Броня", "бой 6 · удар 2", "#7A2E24"), token("Восставший", "бой 2+ · удар 1", "#3C2A44", ring="#A88BE0")]
+      <div style='font-size:24px;margin-top:8px;opacity:.9;white-space:pre-line;text-align:center;line-height:1.3'>{e(sub)}</div></div>"""
+TOK_FRONT = [token("Ходячий", "Защ 2 · Жив 1\nУрон 1 · Скор 1", "#5A6B4A"),
+             token("Бегун", "Защ 4 · Жив 1\nУрон 1 · Скор 2", "#8A6A2E"),
+             token("Бронированный", "Защ 6 · Жив 3\nУрон 2 · Скор 1", "#7A2E24"),
+             token("Восставший", "Защ 2 · Жив 1\nУрон 1 · Скор 1", "#3C2A44", ring="#A88BE0")]
+TOK_BACK = [token("Труп", "ночью встанет", "#4A4640", ring="#2a2826") for _ in range(4)]
 
 # ---------- планшеты ----------
 def player_board():
-    W, H = 1600, 590
-    scales = ["Голод", "Жажда", "Заражение"]
-    over = {"Голод": "в след. День на 2 кубика меньше", "Жажда": "пропускаешь след. День",
-            "Заражение": "шрам, шкала падает до 2"}
+    W, H = 1600, 660
+    scales = ["Голод", "Жажда", "Здоровье", "Фокус"]
+    over = {"Голод": "6-е: в след. День на 2 кубика меньше", "Жажда": "6-е: пропускаешь след. День",
+            "Здоровье": "0: шрам — закрой ячейку кубика, Здоровье = 3",
+            "Фокус": "0: Бой и Крафт с −1 к кубику"}
+    start = {"Голод": 0, "Жажда": 0, "Здоровье": 5, "Фокус": 5}
     rows = ""
     for s in scales:
-        cells = "".join(f"<div style='width:62px;height:62px;border:2px solid #5C584D;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#6C6759;font-size:22px'>{i}</div>" for i in range(6))
+        cells = "".join(f"<div style='width:62px;height:62px;border:2px solid {'#C8E04A' if i == start[s] else '#5C584D'};border-radius:8px;display:flex;align-items:center;justify-content:center;color:#6C6759;font-size:22px'>{i}</div>" for i in range(6))
         rows += (f"<div style='display:flex;align-items:center;gap:8px;margin-bottom:10px'>"
                  f"<div class='h' style='width:170px;font-size:26px'>{s}</div>{cells}"
-                 f"<div style='margin-left:12px;font-size:17px;line-height:1.2;width:230px' class='muted'>6-е: {over[s]}</div></div>")
+                 f"<div style='margin-left:12px;font-size:17px;line-height:1.2;width:240px' class='muted'>{over[s]}</div></div>")
     change = "".join(f"<div style='flex:1;height:58px;border-radius:6px;background:{'#33302A' if i<4 else ('#4A3426' if i<8 else '#6B2E22')};display:flex;align-items:center;justify-content:center;font-size:20px;color:#CFC8B6'>{i}</div>" for i in range(11))
     dice = "".join(f"<div style='width:96px;height:96px;border:3px solid #5C584D;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#6C6759'>{i}</div>" for i in range(1, 7))
-    acts = [("Переход", "любой"), ("Рывок, 2 тайла (+1 Жажда)", "5+"), ("Разведка", "5+"), ("Обыск", "≥ порога"),
-            ("Бой", "2+ / 4+ / 6"), ("Разделать труп", "любой"), ("Баррикада", "любой"),
-            ("Лечение + медикамент", "4+"), ("Отдых: −1 Изменение", "2 кубика"),
-            ("Помочь", "любой"), ("Отчаянно", "+2 куб., +1 Изм."), ("Усилие: сложить 2 кубика", "+1 Голод")]
+    acts = [("Переход: шаг или новый тайл", "любой"), ("Рывок, 2 тайла (+1 Жажда)", "5+"), ("Обыск", "≥ порога"),
+            ("Бой: 1 попадание, −1 Фокус", "≥ Защиты"), ("Добить труп", "любой"),
+            ("Лечение + медикамент:", "4+"), ("   +2 Здоровье или −1 Изменение", ""),
+            ("Отдых: весь День, Фокус = 5", "все"), ("Помочь на своём тайле", "любой"),
+            ("Усилие: сложить 2 кубика", "+1 Голод"), ("Еда: −2 Голод, +1 Фокус", "—"), ("Вода: −2 Жажда", "—")]
     acts_html = "".join(f"<div style='display:flex;justify-content:space-between;font-size:18px;padding:3px 0;border-bottom:1px solid #3A372F'><span>{a}</span><span class='muted'>{c}</span></div>" for a, c in acts)
     body = f"""<div style='width:{W}px;height:{H}px;background:#26241F;padding:34px;display:grid;grid-template-columns:1fr 430px;gap:34px'>
       <div>
         <div class='h' style='font-size:22px;letter-spacing:.1em' class='muted'>КУБИКИ ДЕЙСТВИЙ <span style='font-weight:400;font-size:17px;color:#A7A293'>· шрам закрывает ячейку навсегда</span></div>
         <div style='display:flex;gap:14px;margin:12px 0 26px'>{dice}</div>
-        <div class='h' style='font-size:22px;letter-spacing:.1em;margin-bottom:12px'>ШКАЛЫ <span style='font-weight:400;font-size:17px;color:#A7A293'>· 0–5 без эффекта, плохо только при переполнении</span></div>
+        <div class='h' style='font-size:22px;letter-spacing:.1em;margin-bottom:12px'>ШКАЛЫ <span style='font-weight:400;font-size:17px;color:#A7A293'>· Голод и Жажда растут от 0, Здоровье и Фокус тратятся с 5</span></div>
         {rows}
         <div class='h' style='font-size:22px;letter-spacing:.1em;margin:18px 0 10px'>ИЗМЕНЕНИЕ <span style='font-weight:400;font-size:17px;color:#A7A293'>· переполнение → тайно тяни карту Срыва</span></div>
         <div style='display:flex;gap:6px'>{change}</div>
@@ -219,12 +223,12 @@ def shared_board():
     nights = "".join(f"<div style='flex:1;height:90px;border-radius:8px;background:{'#3B4A2E' if i<=3 else ('#5A4A22' if i<=6 else '#5A2620')};display:flex;align-items:center;justify-content:center;font-size:34px' class='h'>{i}</div>" for i in range(1, 10))
     shift = "".join(f"<div style='flex:1;height:64px;border-radius:6px;background:#33302A;display:flex;align-items:center;justify-content:center;font-size:22px;color:#CFC8B6'>{i}</div>" for i in range(16))
     steps = ["Событие (разлом по типу → ближайший тайл)", "Сдвиг +1", "Искажённые тайлы +1 ступень, гнёзда выпускают врагов",
-             "Трупы встают (переворот)", "Враги +1 ступень (с ночи 2)", "Враги идут к ближайшему (бегун 2 шага)",
-             "Нападение: удар = +1 Заражение (баррикада отменяет удар)", "Ночь +1"]
+             "Трупы встают: труп → Восставший", "Враги идут к ближайшему: шагов = Скорость",
+             "Нападение: каждый враг −Урон Здоровья", "Ночь +1"]
     st = "".join(f"<div style='font-size:21px;padding:5px 0'><b style='color:#C8E04A'>{i}.</b> {s}</div>" for i, s in enumerate(steps, 1))
     body = f"""<div style='width:{W}px;height:{H}px;background:#211F1B;padding:34px;display:grid;grid-template-columns:1fr 560px;gap:34px'>
       <div>
-        <div class='h' style='font-size:52px'>НА ГРАНИ</div><div class='muted' style='font-size:20px'>пробник 0.1</div>
+        <div class='h' style='font-size:52px'>НА ГРАНИ</div><div class='muted' style='font-size:20px'>пробник 0.5</div>
         <div class='h' style='font-size:22px;letter-spacing:.1em;margin:28px 0 10px'>НОЧЬ · эвакуация после 9-й</div>
         <div style='display:flex;gap:8px'>{nights}</div>
         <div class='h' style='font-size:22px;letter-spacing:.1em;margin:28px 0 10px'>СДВИГ</div>

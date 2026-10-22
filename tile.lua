@@ -1,7 +1,24 @@
 
 local value = nil
 
+-- Стол: большая заблокированная поверхность, подгоняется под TABLE_SIZE x TABLE_SIZE, верх на высоте 0.95
+function fitTable()
+  local t = getObjectFromGUID(TABLE)
+  if t == nil then return end
+  t.interactable = false
+  local size = t.getBounds().size
+  if size.x > 0 and math.abs(size.x - TABLE_SIZE) > 0.5 then
+    local sc = t.getScale()
+    local k = TABLE_SIZE / size.x
+    t.setScale({sc.x * k, sc.y, sc.z * k})
+  end
+  local b = t.getBounds()
+  local pos = t.getPosition()
+  t.setPosition({pos.x, pos.y + (0.95 - (b.center.y + b.size.y / 2)), pos.z})
+end
+
 function onLoad(state)
+  fitTable()
   if state ~= nil and state ~= "" then value = tonumber(state) end
   if value == nil then
     local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)

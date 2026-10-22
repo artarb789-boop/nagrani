@@ -2,7 +2,7 @@
 -- На грани: подготовка партии
 local TILE_BAG = "724c60"
 local CAMP = "a5cd68"
-local TABLE = "fcc554"
+local TABLE = "560a6f"
 local TABLE_SIZE = 140
 local NIGHT_DECKS = {
   {guid = "d69964", name = "Ночи 1–3"},
@@ -14,13 +14,15 @@ local BOARD_JSON = [==[{"GUID": "", "Name": "Custom_Board", "Transform": {"posX"
 local BOARD_Z = -14
 local BOARD_GAP = 19
 -- Смещения от центра планшета (планшет 17.45 x 6.43, повёрнут на 180): +x вправо, +z к верху планшета
-local DICE_OFF = {{-4.5, 4.6}, {-3.5, 4.6}, {-2.5, 4.6}, {-1.5, 4.6}, {-0.5, 4.6}, {0.5, 4.6}}
-local MARK_OFF = {{-6.07, 0.37}, {-6.07, -0.41}, {-6.07, -1.2}, {-7.58, -2.43}}
+local DICE_OFF = {{-4.5, 5.0}, {-3.5, 5.0}, {-2.5, 5.0}, {-1.5, 5.0}, {-0.5, 5.0}, {0.5, 5.0}}
+-- Голод 0, Жажда 0, Здоровье 5, Фокус 5, Изменение 0
+local MARK_OFF = {{-6.07, 0.75}, {-6.07, -0.03}, {-2.26, -0.82}, {-2.26, -1.6}, {-7.85, -2.84}}
 local COLORS = {"White", "Red", "Blue", "Green", "Yellow"}
 local MARKERS = {
   {name = "Голод",     color = {0.93, 0.55, 0.2}},
   {name = "Жажда",     color = {0.25, 0.55, 0.95}},
-  {name = "Заражение", color = {0.55, 0.85, 0.2}},
+  {name = "Здоровье",  color = {0.85, 0.2, 0.2}},
+  {name = "Фокус",     color = {0.7, 0.55, 0.95}},
   {name = "Изменение", color = {0.1, 0.1, 0.1}},
 }
 local started = false

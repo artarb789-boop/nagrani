@@ -4,7 +4,7 @@ import json, random, sys
 from pathlib import Path
 from PIL import Image
 sys.path.insert(0, str(Path(__file__).parent))
-from data import TILES, EVENTS, SRYV, HEX_TILES, RIFT_MEMO
+from data import TILES, EVENTS, SRYV, HEX_TILES, RIFT_MEMO, CHARACTERS
 
 ROOT = Path(__file__).parent.parent
 IMG = ROOT / "images"
@@ -171,6 +171,17 @@ rift_tok = custom_tile("rift_token.png", "rift_token.png", tf(s=0.55), "Разл
                        "Кладётся на чистый тайл. Ступень отмечай маркером.", thick=0.15, shape=2)
 objects.append(infinite_bag("Жетоны разлома", rift_tok, -14, 13, color=(0.45, 0.3, 0.65)))
 
+# ---------- персонажи ----------
+ch_cd = {"FaceURL": url("chars_front.png"), "BackURL": url("chars_back.png"), "NumWidth": 6, "NumHeight": 1,
+         "BackIsHidden": True, "UniqueBack": False, "Type": 0}
+ch_cards = []
+for i, c in enumerate(CHARACTERS):
+    cc = card(5, i, ch_cd, c[0], f"Кубики {c[2]}/{c[3]} · Здоровье {c[4]} · Фокус {c[5]} · Переход {c[6]}+ · Открыть {c[7]}+ и 1 Фокус\n{c[8]}\nСлабость: {c[9]}")
+    cc["Transform"]["rotZ"] = 0
+    ch_cards.append(cc)
+objects.append(deck(5, ch_cd, ch_cards, tf(-24, 1.2, -4, s=1.0), "Персонажи",
+                    "Каждый выбирает или тянет одного персонажа."))
+
 # ---------- жетоны, ресурсы, маркеры: сетка слева ----------
 def grid_pos(k):
     return -31 + (k % 3) * 2.6, 13 - (k // 3) * 2.8
@@ -236,7 +247,7 @@ local BOARD_GAP = 19
 local BOARD_W = 17.45
 local BOARD_H = 7.2
 -- Кубики: смещение по x от центра планшета, над верхним краем
-local DICE_X = {-4.5, -3.5, -2.5, -1.5, -0.5, 0.5}
+local DICE_X = {-4.5, -3.5, -2.5}
 -- Маркеры: смещения от центра планшета, замерены по раскладке в TTS
 -- Голод 0, Жажда 0, Здоровье 5, Фокус 5, Изменение 0
 local MARK_OFF = {{-5.57, 0.70}, {-5.56, -0.02}, {-2.05, -0.77}, {-2.05, -1.49}, {-7.19, -2.58}}
@@ -352,7 +363,7 @@ end
 
 function spawnPieces(o, color)
   local dice, marks = piecePositions(o)
-  for i = 1, 6 do
+  for i = 1, #DICE_X do
     spawnObject({
       type = "Die_6", position = dice[i], rotation = {0, 180, 0}, scale = {0.64, 0.64, 0.64},
       callback_function = function(d) d.setColorTint(stringColorToRGB(color)); d.setName("Кубик " .. color) end,
@@ -402,12 +413,12 @@ XML_UI = f'''<Panel id="setup" width="560" height="250" rectAlignment="MiddleCen
   <VerticalLayout padding="24 24 20 20" spacing="14" childForceExpandHeight="false">
     <Text fontSize="30" fontStyle="Bold" color="#EDE9DD" preferredHeight="44">На грани — сколько выживших?</Text>
     <HorizontalLayout spacing="12" preferredHeight="80">{btns}</HorizontalLayout>
-    <Text fontSize="17" color="#A7A293" preferredHeight="50">Появятся планшеты, кубики и маркеры. Стопка местности перемешается. Соло: выбери 1 — получишь двух выживших.</Text>
+    <Text fontSize="17" color="#A7A293" preferredHeight="50">Появятся планшеты, 3 кубика и маркеры. Стопка местности перемешается. Потом выберите персонажей. Соло: выбери 1 — получишь двух выживших.</Text>
   </VerticalLayout>
 </Panel>'''
 
 save = {
-    "SaveName": "На грани — пробник 0.6", "GameMode": "На грани", "Gravity": 0.5, "PlayArea": 1.0,
+    "SaveName": "На грани — пробник 0.7", "GameMode": "На грани", "Gravity": 0.5, "PlayArea": 1.0,
     "Date": "", "Table": "Table_None", "TableURL": "", "Sky": "",
     "Note": rules, "Rules": "", "XmlUI": XML_UI,
     "LuaScript": GLOBAL_LUA, "LuaScriptState": "",

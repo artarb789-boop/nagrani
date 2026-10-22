@@ -4,7 +4,7 @@ import html, sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 sys.path.insert(0, str(Path(__file__).parent))
-from data import TILES, EVENTS, SRYV, DISTORTION_COLOR, LAYER_COLOR, HEX_TILES, RIFT_MEMO, LEVEL_COLOR
+from data import TILES, EVENTS, SRYV, DISTORTION_COLOR, LAYER_COLOR, HEX_TILES, RIFT_MEMO, LEVEL_COLOR, CHARACTERS
 
 OUT = Path(__file__).parent.parent / "images"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -261,7 +261,7 @@ def memo_front(rift):
         <div class='h' style='font-size:40px;margin-top:8px;color:{dc}'>{e(rift)}</div>
         <div class='muted' style='font-size:16px;margin-top:6px;line-height:1.3'>Ступени копятся: на II действует и I.</div>
         {rows}
-        <div style='position:absolute;bottom:0;left:0;right:0;font-size:16px;line-height:1.35' class='muted'>Любой разлом: ночлег Опасный, вход +1 Жажда. Каждую ночь ступень +1 (до III).</div>
+        <div style='position:absolute;bottom:0;left:0;right:0;font-size:16px;line-height:1.35' class='muted'>Любой разлом: вход +1 Изменение, ночлег Опасный. Каждую ночь ступень +1 (до III).</div>
       </div>"""
 
 def memo_back():
@@ -274,14 +274,43 @@ def rift_token():
       <div style='position:absolute;inset:6px;border-radius:50%;background:#3A2A55;border:12px solid #A88BE0;display:flex;align-items:center;justify-content:center'>
       <div class='h' style='font-size:44px;color:#EDE4FF'>РАЗЛОМ</div></div>"""
 
+
+def char_front(c):
+    name, who, d0, dmax, hp, fc, mv, op, ab, wk = c
+    def stat(label, val, col="#EDE9DD"):
+        return (f"<div style='background:#24221E;border-radius:8px;padding:6px 10px'>"
+                f"<div class='muted' style='font-size:13px'>{label}</div><div class='h' style='font-size:26px;color:{col}'>{val}</div></div>")
+    return f"""<div style='position:absolute;inset:0;background:#2B2A24'></div>
+      <div style='position:absolute;left:0;right:0;top:0;height:12px;background:#C8E04A'></div>
+      <div style='position:absolute;inset:30px 26px'>
+        <div style='font-size:14px;text-transform:uppercase;letter-spacing:.12em;color:#C8E04A'>Персонаж</div>
+        <div class='h' style='font-size:38px;margin-top:6px'>{e(name)}</div>
+        <div class='muted' style='font-size:16px;margin-top:2px'>{e(who)}</div>
+        <div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px'>
+          {stat("Кубики", f"{d0} / {dmax}")}{stat("Здоровье", hp, "#F09595")}{stat("Фокус", fc, "#C9B6F0")}
+        </div>
+        <div style='display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px'>
+          {stat("Переход", f"{mv}+")}{stat("Открыть тайл", f"{op}+ и 1 Ф")}
+        </div>
+        <div style='margin-top:14px;font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:#9FCB7A'>Способность</div>
+        <div style='font-size:19px;line-height:1.3;margin-top:3px'>{e(ab)}</div>
+        <div style='margin-top:12px;font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:#E8875A'>Слабость</div>
+        <div style='font-size:19px;line-height:1.3;margin-top:3px'>{e(wk)}</div>
+      </div>"""
+
+def char_back():
+    return """<div style='position:absolute;inset:0;background:#1A1A16'></div>
+      <div style='position:absolute;inset:18px;border:3px solid #C8E04A;border-radius:14px;display:flex;align-items:center;justify-content:center'>
+      <div class='h' style='font-size:44px;letter-spacing:.06em;color:#DDE8B0'>ПЕРСОНАЖ</div></div>"""
+
 # ---------- планшеты ----------
 def player_board():
     W, H = 1600, 660
     scales = ["Голод", "Жажда", "Здоровье", "Фокус"]
-    over = {"Голод": "6-е: в след. День на 2 кубика меньше", "Жажда": "6-е: пропускаешь след. День",
+    over = {"Голод": "6-е: в след. День на 1 кубик меньше", "Жажда": "6-е: пропускаешь след. День",
             "Здоровье": "0: шрам — закрой ячейку кубика, Здоровье = 3",
             "Фокус": "0: Бой и Крафт с −1 к кубику"}
-    start = {"Голод": 0, "Жажда": 0, "Здоровье": 5, "Фокус": 5}
+    start = {"Голод": 0, "Жажда": 0, "Здоровье": None, "Фокус": None}
     rows = ""
     for s in scales:
         cells = "".join(f"<div style='width:62px;height:62px;border:2px solid {'#C8E04A' if i == start[s] else '#5C584D'};border-radius:8px;display:flex;align-items:center;justify-content:center;color:#6C6759;font-size:22px'>{i}</div>" for i in range(6))
@@ -290,17 +319,18 @@ def player_board():
                  f"<div style='margin-left:12px;font-size:17px;line-height:1.2;width:240px' class='muted'>{over[s]}</div></div>")
     change = "".join(f"<div style='flex:1;height:58px;border-radius:6px;background:{'#33302A' if i<4 else ('#4A3426' if i<8 else '#6B2E22')};display:flex;align-items:center;justify-content:center;font-size:20px;color:#CFC8B6'>{i}</div>" for i in range(11))
     dice = "".join(f"<div style='width:96px;height:96px;border:3px solid #5C584D;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#6C6759'>{i}</div>" for i in range(1, 7))
-    acts = [("Переход: шаг или новый тайл", "любой"), ("Рывок, 2 тайла (+1 Жажда)", "5+"), ("Обыск", "≥ порога"),
+    acts = [("Переход по открытым тайлам", "карта"), ("Открыть тайл (и стоп)", "карта + 1 Ф"),
+            ("Рывок, 2 тайла (+1 Жажда)", "5+"), ("Обыск, раз за День", "≥ порога"),
             ("Бой: 1 попадание, −1 Фокус", "≥ Защиты"), ("Добить труп", "любой"),
             ("Лечение + медикамент:", "4+"), ("   +2 Здоровье или −1 Изменение", ""),
-            ("Отдых: весь День, Фокус = 5", "все"), ("Помочь на своём тайле", "любой"),
+            ("Отдых: весь День, Фокус до макс.", "все"), ("Помочь на своём тайле", "любой"),
             ("Усилие: сложить 2 кубика", "+1 Голод"), ("Еда: −2 Голод, +1 Фокус", "—"), ("Вода: −2 Жажда", "—")]
     acts_html = "".join(f"<div style='display:flex;justify-content:space-between;font-size:18px;padding:3px 0;border-bottom:1px solid #3A372F'><span>{a}</span><span class='muted'>{c}</span></div>" for a, c in acts)
     body = f"""<div style='width:{W}px;height:{H}px;background:#26241F;padding:34px;display:grid;grid-template-columns:1fr 430px;gap:34px'>
       <div>
-        <div class='h' style='font-size:22px;letter-spacing:.1em' class='muted'>КУБИКИ ДЕЙСТВИЙ <span style='font-weight:400;font-size:17px;color:#A7A293'>· шрам закрывает ячейку навсегда</span></div>
+        <div class='h' style='font-size:22px;letter-spacing:.1em' class='muted'>КУБИКИ ДЕЙСТВИЙ <span style='font-weight:400;font-size:17px;color:#A7A293'>· старт 3, максимум — на карте персонажа; шрам закрывает ячейку</span></div>
         <div style='display:flex;gap:14px;margin:12px 0 26px'>{dice}</div>
-        <div class='h' style='font-size:22px;letter-spacing:.1em;margin-bottom:12px'>ШКАЛЫ <span style='font-weight:400;font-size:17px;color:#A7A293'>· Голод и Жажда растут от 0, Здоровье и Фокус тратятся с 5</span></div>
+        <div class='h' style='font-size:22px;letter-spacing:.1em;margin-bottom:12px'>ШКАЛЫ <span style='font-weight:400;font-size:17px;color:#A7A293'>· Голод и Жажда растут от 0, Здоровье и Фокус — старт по карте персонажа</span></div>
         {rows}
         <div class='h' style='font-size:22px;letter-spacing:.1em;margin:18px 0 10px'>ИЗМЕНЕНИЕ <span style='font-weight:400;font-size:17px;color:#A7A293'>· переполнение → тайно тяни карту Срыва</span></div>
         <div style='display:flex;gap:6px'>{change}</div>
@@ -322,7 +352,7 @@ def shared_board():
     st = "".join(f"<div style='font-size:21px;padding:5px 0'><b style='color:#C8E04A'>{i}.</b> {s}</div>" for i, s in enumerate(steps, 1))
     body = f"""<div style='width:{W}px;height:{H}px;background:#211F1B;padding:34px;display:grid;grid-template-columns:1fr 560px;gap:34px'>
       <div>
-        <div class='h' style='font-size:52px'>НА ГРАНИ</div><div class='muted' style='font-size:20px'>пробник 0.6</div>
+        <div class='h' style='font-size:52px'>НА ГРАНИ</div><div class='muted' style='font-size:20px'>пробник 0.7</div>
         <div class='h' style='font-size:22px;letter-spacing:.1em;margin:28px 0 10px'>НОЧЬ · эвакуация после 9-й</div>
         <div style='display:flex;gap:8px'>{nights}</div>
         <div class='h' style='font-size:22px;letter-spacing:.1em;margin:28px 0 10px'>СДВИГ</div>
@@ -334,7 +364,7 @@ def shared_board():
       </div>
       <div style='background:#1A1916;border-radius:12px;padding:22px 26px'>
         <div class='h' style='font-size:26px;margin-bottom:6px'>Раунд</div>
-        <div style='font-size:21px;line-height:1.35'><b>День:</b> бросок, действия.<br><b>Сумерки:</b> в Лагере 1 еда + 1 вода каждому (нет → +1 Голод/+1 Жажда); вне Лагеря — Ночлег тайла.</div>
+        <div style='font-size:21px;line-height:1.35'><b>День:</b> бросок, потом по кругу по одному кубику.<br><b>Сумерки:</b> в Лагере 1 еда + 1 вода каждому (нет → +1 Голод/+1 Жажда); вне Лагеря — Ночлег тайла.</div>
         <div class='h' style='font-size:26px;margin:16px 0 6px'>Ночь</div>{st}
       </div></div>"""
     return page(body, W, H), W, H
@@ -365,6 +395,8 @@ def main():
         shoot(pw, "memo_front.png", page(grid([memo_front(r) for r in rifts], 5, 1, CW, CH), 5*CW, CH), 5*CW, CH)
         shoot(pw, "memo_back.png", page(memo_back().join(["<div class='cell' style='width:400px;height:560px'>", "</div>"]), CW, CH), CW, CH)
         shoot(pw, "rift_token.png", page(rift_token(), 256, 256), 256, 256)
+        shoot(pw, "chars_front.png", page(grid([char_front(c) for c in CHARACTERS], 6, 1, CW, CH), 6*CW, CH), 6*CW, CH)
+        shoot(pw, "chars_back.png", page(char_back().join(["<div class='cell' style='width:400px;height:560px'>", "</div>"]), CW, CH), CW, CH)
         shoot(pw, "table_surface.png", page(felt, 2048, 2048), 2048, 2048)
 
 if __name__ == "__main__":

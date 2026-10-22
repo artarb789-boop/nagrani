@@ -3,8 +3,8 @@
 local TERRAIN = {"4d3c1a", "ca264e", "18b8ff", "25165e", "3031d0", "bb3b93", "1db208", "6deceb", "1332a1", "2c0146", "de06ce", "d61aa9"}
 local STACK_POS = {-14, 7}
 local CAMP = "a5cd68"
-local TABLE = "3bf3fa"
-local SHARED = "560a6f"
+local TABLE = "cbb93e"
+local SHARED = "7ec75f"
 local SHARED_W = 33.3
 local TABLE_SIZE = 140
 local NIGHT_DECKS = {
@@ -21,7 +21,7 @@ local BOARD_GAP = 19
 local BOARD_W = 17.45
 local BOARD_H = 7.2
 -- Кубики: смещение по x от центра планшета, над верхним краем
-local DICE_X = {-4.5, -3.5, -2.5, -1.5, -0.5, 0.5}
+local DICE_X = {-4.5, -3.5, -2.5}
 -- Маркеры: смещения от центра планшета, замерены по раскладке в TTS
 -- Голод 0, Жажда 0, Здоровье 5, Фокус 5, Изменение 0
 local MARK_OFF = {{-5.57, 0.70}, {-5.56, -0.02}, {-2.05, -0.77}, {-2.05, -1.49}, {-7.19, -2.58}}
@@ -137,7 +137,7 @@ end
 
 function spawnPieces(o, color)
   local dice, marks = piecePositions(o)
-  for i = 1, 6 do
+  for i = 1, #DICE_X do
     spawnObject({
       type = "Die_6", position = dice[i], rotation = {0, 180, 0}, scale = {0.64, 0.64, 0.64},
       callback_function = function(d) d.setColorTint(stringColorToRGB(color)); d.setName("Кубик " .. color) end,

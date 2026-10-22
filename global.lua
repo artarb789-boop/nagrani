@@ -10,7 +10,10 @@ local NIGHT_DECKS = {
 local OUT_POS = {33, 1.5, 0}
 local BOARD_JSON = [==[{"GUID": "", "Name": "Custom_Board", "Transform": {"posX": 0, "posY": 1, "posZ": 0, "rotX": 0, "rotY": 180, "rotZ": 0, "scaleX": 0.22, "scaleY": 0.22, "scaleZ": 0.22}, "Nickname": "Планшет игрока", "Description": "", "GMNotes": "", "ColorDiffuse": {"r": 1, "g": 1, "b": 1}, "Locked": false, "Grid": false, "Snap": true, "Autoraise": true, "Sticky": true, "Tooltip": true, "GridProjection": false, "Hands": false, "LuaScript": "", "LuaScriptState": "", "CustomImage": {"ImageURL": "file:///C:/NaGrani/images/player_board.png", "ImageSecondaryURL": "", "ImageScalar": 1.0, "WidthScale": 0.0}}]==]
 local BOARD_Z = -14
-local BOARD_GAP = 10
+local BOARD_GAP = 19
+-- Смещения от центра планшета (планшет 17.45 x 6.43, повёрнут на 180): +x вправо, +z к верху планшета
+local DICE_OFF = {{-4.5, 4.6}, {-3.5, 4.6}, {-2.5, 4.6}, {-1.5, 4.6}, {-0.5, 4.6}, {0.5, 4.6}}
+local MARK_OFF = {{-6.07, 0.37}, {-6.07, -0.41}, {-6.07, -1.2}, {-7.58, -2.43}}
 local COLORS = {"White", "Red", "Blue", "Green", "Yellow"}
 local MARKERS = {
   {name = "Голод",     color = {0.93, 0.55, 0.2}},
@@ -42,7 +45,8 @@ function choosePlayers(player, value, id)
   local boards = n
   if n == 1 then boards = 2 end
   spawnPlayers(boards)
-  broadcastToAll("Выживших: " .. boards .. ". Вокруг Лагеря открыты 4 тайла, колоды ночей готовы.", {0.78, 0.88, 0.29})
+  startSupply(boards)
+  broadcastToAll("Выживших: " .. boards .. ". Вокруг Лагеря открыты 4 тайла, колоды ночей готовы, в общем запасе еда и вода.", {0.78, 0.88, 0.29})
 end
 
 -- Направления от Лагеря в мире: 0 = +z, 1 = +x, 2 = -z, 3 = -x.
@@ -102,6 +106,22 @@ function trimNightDecks()
   end
 end
 
+-- Общий запас: по 2 еды и 2 воды на выжившего
+function startSupply(n)
+  local function put(name, color, x0, count)
+    for i = 1, count do
+      spawnObject({
+        type = "BlockSquare",
+        position = {x0 + ((i - 1) % 4) * 0.7, 2 + math.floor((i - 1) / 4) * 0.6, 13.5},
+        scale = {0.45, 0.45, 0.45},
+        callback_function = function(o) o.setColorTint(color); o.setName(name) end,
+      })
+    end
+  end
+  put("Вода", {0.25, 0.55, 0.95}, -4.5, 2 * n)
+  put("Еда", {0.93, 0.55, 0.2}, 1.5, 2 * n)
+end
+
 function spawnPlayers(n)
   local camp = getObjectFromGUID(CAMP)
   local cp = {x = 0, y = 1, z = 0}
@@ -123,14 +143,14 @@ function spawnPlayers(n)
     })
     for i = 1, 6 do
       spawnObject({
-        type = "Die_6", position = {x - 3.6 + (i - 1) * 1.2, 2, BOARD_Z - 4}, rotation = {0, 180, 0},
+        type = "Die_6", position = {x + DICE_OFF[i][1], 2, BOARD_Z + DICE_OFF[i][2]}, rotation = {0, 180, 0},
         scale = {0.8, 0.8, 0.8},
         callback_function = function(o) o.setColorTint(stringColorToRGB(color)); o.setName("Кубик " .. color) end,
       })
     end
     for m, mk in ipairs(MARKERS) do
       spawnObject({
-        type = "BlockSquare", position = {x + 4 + (m - 1) * 0.8, 2, BOARD_Z - 4}, rotation = {0, 180, 0},
+        type = "BlockSquare", position = {x + MARK_OFF[m][1], 2, BOARD_Z + MARK_OFF[m][2]}, rotation = {0, 180, 0},
         scale = {0.35, 0.35, 0.35},
         callback_function = function(o) o.setColorTint(mk.color); o.setName(mk.name .. " (" .. color .. ")") end,
       })

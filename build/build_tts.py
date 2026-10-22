@@ -195,7 +195,7 @@ for nick, col in RES:
     x, z = grid_pos(k); k += 1
     objects.append(infinite_bag(nick, block(nick, col), x, z, color=col))
 x, z = grid_pos(k)
-objects.append(infinite_bag("Кубики d6", obj("Die_6", tf(s=0.8), "Кубик"), x, z, color=(0.9, 0.9, 0.9)))
+objects.append(infinite_bag("Кубики d6", obj("Die_6", tf(s=0.64), "Кубик"), x, z, color=(0.9, 0.9, 0.9)))
 
 # ---------- общее поле и правила ----------
 def board(img, transform, nick):
@@ -383,7 +383,7 @@ function spawnPlayers(n)
     for i = 1, 6 do
       spawnObject({
         type = "Die_6", position = {x + DICE_OFF[i][1], 2, BOARD_Z + DICE_OFF[i][2]}, rotation = {0, 180, 0},
-        scale = {0.8, 0.8, 0.8},
+        scale = {0.64, 0.64, 0.64},
         callback_function = function(o) o.setColorTint(stringColorToRGB(color)); o.setName("Кубик " .. color) end,
       })
     end

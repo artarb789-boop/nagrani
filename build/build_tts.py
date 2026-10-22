@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Собирает файл сохранения Tabletop Simulator для пробника «На грани» (v0.2)."""
+"""Собирает файл сохранения Tabletop Simulator для пробника «На грани» (v0.6, гексы)."""
 import json, random, sys
 from pathlib import Path
 from PIL import Image
 sys.path.insert(0, str(Path(__file__).parent))
-from data import TILES, EVENTS, SRYV
+from data import TILES, EVENTS, SRYV, HEX_TILES, RIFT_MEMO
 
 ROOT = Path(__file__).parent.parent
 IMG = ROOT / "images"
@@ -46,33 +46,14 @@ def crop_sheet(sheet, cols, cw, ch, count, prefix):
         names.append("tiles/" + n)
     return names
 
-tf_names = crop_sheet("tiles_front.png", 5, 512, 512, len(TILES), "tile_front")
-tb_names = crop_sheet("tiles_back.png", 5, 512, 512, len(TILES), "tile_back")
 kf_names = crop_sheet("tokens_front.png", 2, 256, 256, 4, "token_front")
 kb_names = crop_sheet("tokens_back.png", 2, 256, 256, 4, "token_back")
 
-# Скрипт тайла: счётчик запаса с кнопками − и + на обеих сторонах
+# Скрипт тайла: счётчик запаса с кнопками − и + на лицевой стороне
 TILE_LUA = r'''
 local value = nil
 
--- Стол: большая заблокированная поверхность, подгоняется под TABLE_SIZE x TABLE_SIZE, верх на высоте 0.95
-function fitTable()
-  local t = getObjectFromGUID(TABLE)
-  if t == nil then return end
-  t.interactable = false
-  local size = t.getBounds().size
-  if size.x > 0 and math.abs(size.x - TABLE_SIZE) > 0.5 then
-    local sc = t.getScale()
-    local k = TABLE_SIZE / size.x
-    t.setScale({sc.x * k, sc.y, sc.z * k})
-  end
-  local b = t.getBounds()
-  local pos = t.getPosition()
-  t.setPosition({pos.x, pos.y + (0.95 - (b.center.y + b.size.y / 2)), pos.z})
-end
-
 function onLoad(state)
-  fitTable()
   if state ~= nil and state ~= "" then value = tonumber(state) end
   if value == nil then
     local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)
@@ -93,15 +74,12 @@ function draw()
   local s = self.getScale()
   local h = (b.size.x / s.x) / 2
   if h <= 0 then h = 1 end
-  local z = h * 0.80
-  local sc = {h * 0.22, 1, h * 0.22}
-  local sides = {
-    {y = 0.2,  rot = {0, 0, 0},   dir = -1},
-    {y = -0.2, rot = {0, 0, 180}, dir = 1},
-  }
-  for _, sd in ipairs(sides) do
-    local x0 = sd.dir * h * 0.52
-    local step = sd.dir * h * 0.20
+  local z = h * 0.58
+  local sc = {h * 0.2, 1, h * 0.2}
+  local sd = {y = 0.2, rot = {0, 0, 0}}
+  do
+    local x0 = h * 0.2
+    local step = -h * 0.2
     self.createButton({click_function = "minus", function_owner = self, label = "−",
       position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,
       scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = "Запас −1"})
@@ -115,11 +93,11 @@ function draw()
 end
 '''
 
-def custom_tile(front, back, transform, nick, desc="", thick=0.15, gm="", lua=""):
+def custom_tile(front, back, transform, nick, desc="", thick=0.15, gm="", lua="", shape=0):
     return obj("Custom_Tile", transform, nick, desc, GMNotes=gm, LuaScript=lua,
                CustomImage={"ImageURL": url(front), "ImageSecondaryURL": url(back), "ImageScalar": 1.0,
                             "WidthScale": 0.0,
-                            "CustomTile": {"Type": 0, "Thickness": thick, "Stackable": False, "Stretch": True}})
+                            "CustomTile": {"Type": shape, "Thickness": thick, "Stackable": False, "Stretch": True}})
 
 def infinite_bag(nick, inner, x, z, color=(0.25, 0.25, 0.25)):
     return obj("Infinite_Bag", tf(x, 1.5, z), nick, color=color, ContainedObjects=[inner])
@@ -130,23 +108,25 @@ def block(nick, color, s=0.45):
 objects = []
 TILE_SCALE = 3.0
 
-# Лагерь в центр
-camp = custom_tile(tf_names[0], tb_names[0], tf(0, 1, 0, s=TILE_SCALE), "Лагерь",
-                   "Старт. Сумерки: еда и вода из общего запаса.",
-                   gm=json.dumps({"edges": "NESW", "zap": 0}))
+# Лагерь в центр (гекс)
+def hexf(n): return f"hex/hex_front_{n:02d}.png"
+def hexb(l): return f"hex/hex_back_{l}.png"
+camp = custom_tile(hexf(0), hexb(0), tf(0, 1, 0, s=TILE_SCALE), "Лагерь",
+                   "Старт. Сумерки: еда и вода из общего запаса.", thick=0.2, shape=1,
+                   gm=json.dumps({"edges": "111111", "zap": 0}))
 objects.append(camp)
 
-# Остальные тайлы в мешок
-bag_tiles = []
-for t in TILES[1:]:
-    n, name, q, edges, srch, loot, zap, thr, nl, nle, dist, dname, *_ = t
-    desc = f"{q} · Обыск {srch}+ · Угроза {thr} · Запас {zap} · {nl}: {nle}\nОборот: {dname} ({dist})"
-    bag_tiles.append(custom_tile(tf_names[n], tb_names[n], tf(s=TILE_SCALE), name, desc,
-                                 gm=json.dumps({"edges": edges, "zap": zap}), lua=TILE_LUA))
-tile_bag = obj("Bag", tf(-13, 1.5, 7, s=1.3), "Тайлы города",
-               "Тяни вслепую, клади обычной (светлой) стороной вверх.",
-               color=(0.35, 0.3, 0.25), ContainedObjects=bag_tiles)
-objects.append(tile_bag)
+# Стопка местности: рубашкой (уровнем) вверх, скрипт перемешивает при выборе игроков
+STACK = (-14, 7)
+terrain = []
+for i, t in enumerate(HEX_TILES[1:]):
+    n, name, lvl, q, edges, srch, loot, zap, nl, nle, rift, dist, own = t
+    desc = f"Уровень {lvl} · {q} · Обыск {srch}+ · Лут: {loot} · {nl}: {nle}\nРазлом: {rift}" + (f" (с начала игры) — {own}" if dist else "")
+    o = custom_tile(hexf(n), hexb(lvl), tf(STACK[0], 1.2 + i * 0.3, STACK[1], rz=180, s=TILE_SCALE), name, desc,
+                    thick=0.2, shape=1, gm=json.dumps({"edges": edges, "zap": zap, "level": lvl}), lua=TILE_LUA)
+    terrain.append(o)
+    objects.append(o)
+
 
 # ---------- колоды ----------
 def card(deck_key, idx, cd, nick, desc=""):
@@ -176,6 +156,20 @@ sr_cd = {"FaceURL": url("sryv_front.png"), "BackURL": url("sryv_back.png"), "Num
 sr_cards = [card(3, i, sr_cd, c[0], f"{c[1]}: {c[2]}") for i, c in enumerate(SRYV)]
 objects.append(deck(3, sr_cd, sr_cards, tf(21, 1.2, 6.5, rz=180, s=1.0), "Срыв",
                     "Переполнил Изменение — тайно возьми карту себе в руку."))
+
+# ---------- памятки разломов и жетон разлома ----------
+mm_cd = {"FaceURL": url("memo_front.png"), "BackURL": url("memo_back.png"), "NumWidth": 5, "NumHeight": 1,
+         "BackIsHidden": True, "UniqueBack": False, "Type": 0}
+mm_cards = []
+for i, r in enumerate(RIFT_MEMO):
+    c = card(4, i, mm_cd, f"Разлом: {r}", " / ".join(f"{x}: {t}" for x, t in zip(["I", "II", "III"], RIFT_MEMO[r])))
+    c["Transform"]["rotZ"] = 0
+    mm_cards.append(c)
+objects.append(deck(4, mm_cd, mm_cards, tf(30.5, 1.2, 12, s=1.0), "Памятки разломов",
+                    "Разложи все пять рядом с общим полем."))
+rift_tok = custom_tile("rift_token.png", "rift_token.png", tf(s=0.55), "Разлом",
+                       "Кладётся на чистый тайл. Ступень отмечай маркером.", thick=0.15, shape=2)
+objects.append(infinite_bag("Жетоны разлома", rift_tok, -14, 13, color=(0.45, 0.3, 0.65)))
 
 # ---------- жетоны, ресурсы, маркеры: сетка слева ----------
 def grid_pos(k):
@@ -218,7 +212,8 @@ BOARD_JSON = json.dumps(pb, ensure_ascii=False)
 
 GLOBAL_LUA = r'''
 -- На грани: подготовка партии
-local TILE_BAG = "__TILE_BAG__"
+local TERRAIN = {__TERRAIN__}
+local STACK_POS = {__STACK_X__, __STACK_Z__}
 local CAMP = "__CAMP__"
 local TABLE = "__TABLE__"
 local TABLE_SIZE = 140
@@ -279,55 +274,30 @@ function choosePlayers(player, value, id)
   started = true
   UI.hide("setup")
   pcall(function() math.randomseed(os.time()) end)
-  placeStartTiles()
+  stackTerrain()
   trimNightDecks()
   local boards = n
   if n == 1 then boards = 2 end
   spawnPlayers(boards)
   startSupply(boards)
-  broadcastToAll("Выживших: " .. boards .. ". Вокруг Лагеря открыты 4 тайла, колоды ночей готовы, в общем запасе еда и вода.", {0.78, 0.88, 0.29})
+  broadcastToAll("Выживших: " .. boards .. ". Стопка местности перемешана, колоды ночей готовы, в общем запасе еда и вода.", {0.78, 0.88, 0.29})
 end
 
--- Направления от Лагеря в мире: 0 = +z, 1 = +x, 2 = -z, 3 = -x.
--- Край тайла i (N=0, E=1, S=2, W=3) после k поворотов на 90° смотрит в сторону (i + k) % 4.
-local EDGE = {N = 0, E = 1, S = 2, W = 3}
-local OFFSETS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
-
-function placeStartTiles()
-  local bag = getObjectFromGUID(TILE_BAG)
-  local camp = getObjectFromGUID(CAMP)
-  if bag == nil or camp == nil then return end
-  bag.shuffle()
-  local cp = camp.getPosition()
-  local step = camp.getBounds().size.x + 0.1
-  for d = 0, 3 do
-    local off = OFFSETS[d + 1]
-    local pos = {cp.x + off[1] * step, cp.y + 0.6, cp.z + off[2] * step}
-    bag.takeObject({
-      position = pos, rotation = {0, 180, 0}, smooth = false,
-      callback_function = function(o) orientToCamp(o, d) end,
-    })
+-- Стопка местности: перемешать и сложить рубашкой (уровнем) вверх
+function stackTerrain()
+  local list = {}
+  for _, g in ipairs(TERRAIN) do
+    local o = getObjectFromGUID(g)
+    if o ~= nil then table.insert(list, o) end
   end
-end
-
-function orientToCamp(o, d)
-  local need = (d + 2) % 4
-  local edges = "NESW"
-  local ok, data = pcall(function() return JSON.decode(o.getGMNotes()) end)
-  if ok and data ~= nil and data.edges ~= nil then edges = data.edges end
-  local opts = {}
-  for c in string.gmatch(edges, ".") do
-    if EDGE[c] ~= nil then table.insert(opts, EDGE[c]) end
+  for i = #list, 2, -1 do
+    local j = math.random(i)
+    list[i], list[j] = list[j], list[i]
   end
-  if #opts == 0 then return end
-  -- предпочитаем поворот, при котором текст читается: 0, потом четверть оборота, потом вверх ногами
-  local pref = {[0] = 0, [1] = 1, [3] = 1, [2] = 2}
-  local bestK, bestScore = nil, 99
-  for _, i in ipairs(opts) do
-    local k = (need - i) % 4
-    if pref[k] < bestScore then bestK, bestScore = k, pref[k] end
+  for i, o in ipairs(list) do
+    o.setRotation({0, 180, 180})
+    o.setPosition({STACK_POS[1], 1.2 + i * 0.3, STACK_POS[2]})
   end
-  o.setRotation({0, 180 + 90 * bestK, 0})
 end
 
 function trimNightDecks()
@@ -397,7 +367,7 @@ function spawnPlayers(n)
   end
 end
 '''
-for key, val in {"__TILE_BAG__": tile_bag["GUID"], "__CAMP__": camp["GUID"], "__TABLE__": table_surf["GUID"],
+for key, val in {"__TERRAIN__": ", ".join('"%s"' % o["GUID"] for o in terrain), "__STACK_X__": str(STACK[0]), "__STACK_Z__": str(STACK[1]), "__CAMP__": camp["GUID"], "__TABLE__": table_surf["GUID"],
                  "__EARLY__": layer_guids["Ранние"], "__MID__": layer_guids["Средние"],
                  "__LATE__": layer_guids["Поздние"], "__BOARD__": BOARD_JSON}.items():
     GLOBAL_LUA = GLOBAL_LUA.replace(key, val)
@@ -408,12 +378,12 @@ XML_UI = f'''<Panel id="setup" width="560" height="250" rectAlignment="MiddleCen
   <VerticalLayout padding="24 24 20 20" spacing="14" childForceExpandHeight="false">
     <Text fontSize="30" fontStyle="Bold" color="#EDE9DD" preferredHeight="44">На грани — сколько выживших?</Text>
     <HorizontalLayout spacing="12" preferredHeight="80">{btns}</HorizontalLayout>
-    <Text fontSize="17" color="#A7A293" preferredHeight="50">Появятся планшеты, кубики и маркеры. Вокруг Лагеря откроются 4 случайных тайла. Соло: выбери 1 — получишь двух выживших.</Text>
+    <Text fontSize="17" color="#A7A293" preferredHeight="50">Появятся планшеты, кубики и маркеры. Стопка местности перемешается. Соло: выбери 1 — получишь двух выживших.</Text>
   </VerticalLayout>
 </Panel>'''
 
 save = {
-    "SaveName": "На грани — пробник 0.5", "GameMode": "На грани", "Gravity": 0.5, "PlayArea": 1.0,
+    "SaveName": "На грани — пробник 0.6", "GameMode": "На грани", "Gravity": 0.5, "PlayArea": 1.0,
     "Date": "", "Table": "Table_None", "TableURL": "", "Sky": "",
     "Note": rules, "Rules": "", "XmlUI": XML_UI,
     "LuaScript": GLOBAL_LUA, "LuaScriptState": "",

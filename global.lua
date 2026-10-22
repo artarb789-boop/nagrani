@@ -1,13 +1,14 @@
 
 -- На грани: подготовка партии
-local TILE_BAG = "724c60"
+local TERRAIN = {"4d3c1a", "ca264e", "18b8ff", "25165e", "3031d0", "bb3b93", "1db208", "6deceb", "1332a1", "2c0146", "de06ce", "d61aa9"}
+local STACK_POS = {-14, 7}
 local CAMP = "a5cd68"
-local TABLE = "560a6f"
+local TABLE = "3bf3fa"
 local TABLE_SIZE = 140
 local NIGHT_DECKS = {
-  {guid = "d69964", name = "Ночи 1–3"},
-  {guid = "31e26b",   name = "Ночи 4–6"},
-  {guid = "e807c8",  name = "Ночи 7–9"},
+  {guid = "1fac61", name = "Ночи 1–3"},
+  {guid = "49dbcd",   name = "Ночи 4–6"},
+  {guid = "2025e0",  name = "Ночи 7–9"},
 }
 local OUT_POS = {33, 1.5, 0}
 local BOARD_JSON = [==[{"GUID": "", "Name": "Custom_Board", "Transform": {"posX": 0, "posY": 1, "posZ": 0, "rotX": 0, "rotY": 180, "rotZ": 0, "scaleX": 0.22, "scaleY": 0.22, "scaleZ": 0.22}, "Nickname": "Планшет игрока", "Description": "", "GMNotes": "", "ColorDiffuse": {"r": 1, "g": 1, "b": 1}, "Locked": false, "Grid": false, "Snap": true, "Autoraise": true, "Sticky": true, "Tooltip": true, "GridProjection": false, "Hands": false, "LuaScript": "", "LuaScriptState": "", "CustomImage": {"ImageURL": "file:///C:/NaGrani/images/player_board.png", "ImageSecondaryURL": "", "ImageScalar": 1.0, "WidthScale": 0.0}}]==]
@@ -61,55 +62,30 @@ function choosePlayers(player, value, id)
   started = true
   UI.hide("setup")
   pcall(function() math.randomseed(os.time()) end)
-  placeStartTiles()
+  stackTerrain()
   trimNightDecks()
   local boards = n
   if n == 1 then boards = 2 end
   spawnPlayers(boards)
   startSupply(boards)
-  broadcastToAll("Выживших: " .. boards .. ". Вокруг Лагеря открыты 4 тайла, колоды ночей готовы, в общем запасе еда и вода.", {0.78, 0.88, 0.29})
+  broadcastToAll("Выживших: " .. boards .. ". Стопка местности перемешана, колоды ночей готовы, в общем запасе еда и вода.", {0.78, 0.88, 0.29})
 end
 
--- Направления от Лагеря в мире: 0 = +z, 1 = +x, 2 = -z, 3 = -x.
--- Край тайла i (N=0, E=1, S=2, W=3) после k поворотов на 90° смотрит в сторону (i + k) % 4.
-local EDGE = {N = 0, E = 1, S = 2, W = 3}
-local OFFSETS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
-
-function placeStartTiles()
-  local bag = getObjectFromGUID(TILE_BAG)
-  local camp = getObjectFromGUID(CAMP)
-  if bag == nil or camp == nil then return end
-  bag.shuffle()
-  local cp = camp.getPosition()
-  local step = camp.getBounds().size.x + 0.1
-  for d = 0, 3 do
-    local off = OFFSETS[d + 1]
-    local pos = {cp.x + off[1] * step, cp.y + 0.6, cp.z + off[2] * step}
-    bag.takeObject({
-      position = pos, rotation = {0, 180, 0}, smooth = false,
-      callback_function = function(o) orientToCamp(o, d) end,
-    })
+-- Стопка местности: перемешать и сложить рубашкой (уровнем) вверх
+function stackTerrain()
+  local list = {}
+  for _, g in ipairs(TERRAIN) do
+    local o = getObjectFromGUID(g)
+    if o ~= nil then table.insert(list, o) end
   end
-end
-
-function orientToCamp(o, d)
-  local need = (d + 2) % 4
-  local edges = "NESW"
-  local ok, data = pcall(function() return JSON.decode(o.getGMNotes()) end)
-  if ok and data ~= nil and data.edges ~= nil then edges = data.edges end
-  local opts = {}
-  for c in string.gmatch(edges, ".") do
-    if EDGE[c] ~= nil then table.insert(opts, EDGE[c]) end
+  for i = #list, 2, -1 do
+    local j = math.random(i)
+    list[i], list[j] = list[j], list[i]
   end
-  if #opts == 0 then return end
-  -- предпочитаем поворот, при котором текст читается: 0, потом четверть оборота, потом вверх ногами
-  local pref = {[0] = 0, [1] = 1, [3] = 1, [2] = 2}
-  local bestK, bestScore = nil, 99
-  for _, i in ipairs(opts) do
-    local k = (need - i) % 4
-    if pref[k] < bestScore then bestK, bestScore = k, pref[k] end
+  for i, o in ipairs(list) do
+    o.setRotation({0, 180, 180})
+    o.setPosition({STACK_POS[1], 1.2 + i * 0.3, STACK_POS[2]})
   end
-  o.setRotation({0, 180 + 90 * bestK, 0})
 end
 
 function trimNightDecks()
@@ -165,7 +141,7 @@ function spawnPlayers(n)
     for i = 1, 6 do
       spawnObject({
         type = "Die_6", position = {x + DICE_OFF[i][1], 2, BOARD_Z + DICE_OFF[i][2]}, rotation = {0, 180, 0},
-        scale = {0.8, 0.8, 0.8},
+        scale = {0.64, 0.64, 0.64},
         callback_function = function(o) o.setColorTint(stringColorToRGB(color)); o.setName("Кубик " .. color) end,
       })
     end

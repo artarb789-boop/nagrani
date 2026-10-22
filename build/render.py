@@ -4,7 +4,7 @@ import html, sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 sys.path.insert(0, str(Path(__file__).parent))
-from data import TILES, EVENTS, SRYV, DISTORTION_COLOR, LAYER_COLOR
+from data import TILES, EVENTS, SRYV, DISTORTION_COLOR, LAYER_COLOR, HEX_TILES, RIFT_MEMO, LEVEL_COLOR
 
 OUT = Path(__file__).parent.parent / "images"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -181,6 +181,99 @@ TOK_FRONT = [token("Ходячий", "Защ 2 · Жив 1\nУрон 1 · Ско
              token("Восставший", "Защ 2 · Жив 1\nУрон 1 · Скор 1", "#3C2A44", ring="#A88BE0")]
 TOK_BACK = [token("Труп", "ночью встанет", "#4A4640", ring="#2a2826") for _ in range(4)]
 
+
+# ---------- гексы (плоская вершина, вписаны в квадрат 1024) ----------
+import math
+HX = 1024
+ROMAN = {0: "", 1: "I", 2: "II", 3: "III"}
+def hex_pts(inset=0):
+    c, R = HX / 2, HX / 2 - inset
+    return [(c + R * math.cos(math.radians(60 * i)), c + R * math.sin(math.radians(60 * i))) for i in range(6)]
+# края N, NE, SE, S, SW, NW между вершинами (4,5), (5,0), (0,1), (1,2), (2,3), (3,4)
+EDGE_V = [(4, 5), (5, 0), (0, 1), (1, 2), (2, 3), (3, 4)]
+
+def hex_svg(bg, edges=None, road="#C9C2AC", wall="#D0643A"):
+    V = hex_pts(0)
+    poly = " ".join(f"{x:.1f},{y:.1f}" for x, y in V)
+    parts = [f"<polygon points='{poly}' fill='{bg}'/>"]
+    if edges:
+        Vi = hex_pts(16)
+        for k, (a, b) in enumerate(EDGE_V):
+            (x1, y1), (x2, y2) = Vi[a], Vi[b]
+            if edges[k] == "1":
+                mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+                dx, dy = (x2 - x1) * 0.16, (y2 - y1) * 0.16
+                parts.append(f"<line x1='{mx-dx:.1f}' y1='{my-dy:.1f}' x2='{mx+dx:.1f}' y2='{my+dy:.1f}' stroke='{road}' stroke-width='26' stroke-linecap='round'/>")
+            else:
+                parts.append(f"<line x1='{x1:.1f}' y1='{y1:.1f}' x2='{x2:.1f}' y2='{y2:.1f}' stroke='{wall}' stroke-width='22' stroke-dasharray='26 14'/>")
+    return f"<svg width='{HX}' height='{HX}' style='position:absolute;inset:0'>{''.join(parts)}</svg>"
+
+def hex_front(t):
+    n, name, lvl, q, edges, srch, loot, zap, nl, nle, rift, dist, own = t
+    if n == 0:
+        body = (f"<div class='h' style='position:absolute;top:330px;left:0;right:0;text-align:center;font-size:96px'>ЛАГЕРЬ</div>"
+                f"<div class='muted' style='position:absolute;top:460px;left:0;right:0;text-align:center;font-size:34px'>спортзал школы</div>"
+                f"<div style='position:absolute;top:560px;left:0;right:0;text-align:center;font-size:32px;line-height:1.35'>Сумерки: каждый ест и пьёт<br>из общего запаса.<br>После 9-й ночи — эвакуация отсюда.</div>")
+        return f"<div style='position:absolute;inset:0;background:#000'></div>" + hex_svg("#2C3A44", edges) + body
+    bg = "#1E2216" if dist else "#3A3730"
+    lc = LEVEL_COLOR[lvl]
+    dc = DISTORTION_COLOR[rift]
+    if dist:
+        mid = (f"<div style='position:absolute;top:555px;left:210px;right:210px;border:3px solid {dc};border-radius:16px;padding:18px 24px'>"
+               f"<div style='font-size:26px;color:{dc};font-weight:700'>◆ Разлом: {e(rift)} · с начала игры</div>"
+               f"<div style='font-size:31px;line-height:1.25;margin-top:8px'>{e(own)}</div></div>")
+    else:
+        mid = (f"<div style='position:absolute;top:615px;left:0;right:0;text-align:center;font-size:28px'>"
+               f"<span style='display:inline-block;width:20px;height:20px;transform:rotate(45deg);background:{dc};margin-right:12px'></span>"
+               f"<span class='muted'>может открыться разлом:</span> <b style='color:{dc}'>{e(rift)}</b></div>")
+    body = f"""
+      <div style='position:absolute;top:112px;left:0;right:0;display:flex;justify-content:center'>
+        <div class='h' style='width:84px;height:84px;border-radius:50%;background:{lc};color:#1A1712;font-size:40px;display:flex;align-items:center;justify-content:center'>{ROMAN[lvl]}</div></div>
+      <div class='muted' style='position:absolute;top:205px;left:0;right:0;text-align:center;font-size:26px;text-transform:uppercase;letter-spacing:.1em'>{e(q)} · №{n}</div>
+      <div class='h' style='position:absolute;top:247px;left:150px;right:150px;text-align:center;font-size:{60 if len(name) < 16 else 50}px;line-height:1.05'>{e(name)}</div>
+      <div style='position:absolute;top:345px;left:0;right:0;text-align:center;font-size:40px'><span class='muted'>Обыск</span> <b>{srch}+</b> <span class='muted' style='margin-left:28px'>Лут:</span> {e(loot)}</div>
+      <div style='position:absolute;top:425px;left:190px;right:190px;text-align:center;font-size:32px;line-height:1.3'><b style='color:{"#E8875A" if nl == "Опасное" else "#9FCB7A"}'>{e(nl)}:</b> {e(nle)}</div>
+      {mid}
+      <div class='muted' style='position:absolute;top:737px;left:0;right:0;text-align:center;font-size:24px;letter-spacing:.12em'>ЗАПАС</div>"""
+    return f"<div style='position:absolute;inset:0;background:#000'></div>" + hex_svg(bg, edges) + body
+
+def hex_back(lvl):
+    if lvl == 0:
+        return hex_front(HEX_TILES[0])
+    lc = LEVEL_COLOR[lvl]
+    sub = {1: "окраины", 2: "опасно", 3: "смертельно опасно"}[lvl]
+    return (f"<div style='position:absolute;inset:0;background:#000'></div>" + hex_svg("#191714", "000000", wall=lc)
+            + f"<div class='h' style='position:absolute;top:300px;left:0;right:0;text-align:center;font-size:260px;color:{lc};line-height:1'>{ROMAN[lvl]}</div>"
+            + f"<div style='position:absolute;top:610px;left:0;right:0;text-align:center;font-size:40px;color:{lc};letter-spacing:.1em'>{sub.upper()}</div>")
+
+def memo_front(rift):
+    dc = DISTORTION_COLOR[rift]
+    spawn = ["ходячий", "бегун", "бронированный"]
+    rows = "".join(
+        f"<div style='display:flex;gap:12px;margin-top:14px'>"
+        f"<span style='flex:none;width:42px;height:42px;border-radius:50%;border:3px solid {dc};color:{dc};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px'>{r}</span>"
+        f"<div><div style='font-size:20px;line-height:1.25'>{e(txt)}</div><div class='muted' style='font-size:16px;margin-top:2px'>выпускает: {spawn[i]}</div></div></div>"
+        for i, (r, txt) in enumerate(zip(["I", "II", "III"], RIFT_MEMO[rift])))
+    return f"""<div style='position:absolute;inset:0;background:#221F1B'></div>
+      <div style='position:absolute;left:0;right:0;top:0;height:12px;background:{dc}'></div>
+      <div style='position:absolute;inset:34px 28px'>
+        <div style='font-size:15px;text-transform:uppercase;letter-spacing:.12em;color:{dc}'>Памятка разлома</div>
+        <div class='h' style='font-size:40px;margin-top:8px;color:{dc}'>{e(rift)}</div>
+        <div class='muted' style='font-size:16px;margin-top:6px;line-height:1.3'>Ступени копятся: на II действует и I.</div>
+        {rows}
+        <div style='position:absolute;bottom:0;left:0;right:0;font-size:16px;line-height:1.35' class='muted'>Любой разлом: ночлег Опасный, вход +1 Жажда. Каждую ночь ступень +1 (до III).</div>
+      </div>"""
+
+def memo_back():
+    return """<div style='position:absolute;inset:0;background:#17151F'></div>
+      <div style='position:absolute;inset:18px;border:3px solid #A88BE0;border-radius:14px;display:flex;align-items:center;justify-content:center'>
+      <div class='h' style='font-size:52px;letter-spacing:.06em;color:#C9B6F0'>РАЗЛОМ</div></div>"""
+
+def rift_token():
+    return """<div style='position:absolute;inset:0;background:#000'></div>
+      <div style='position:absolute;inset:6px;border-radius:50%;background:#3A2A55;border:12px solid #A88BE0;display:flex;align-items:center;justify-content:center'>
+      <div class='h' style='font-size:44px;color:#EDE4FF'>РАЗЛОМ</div></div>"""
+
 # ---------- планшеты ----------
 def player_board():
     W, H = 1600, 660
@@ -222,13 +315,14 @@ def shared_board():
     W, H = 1600, 900
     nights = "".join(f"<div style='flex:1;height:90px;border-radius:8px;background:{'#3B4A2E' if i<=3 else ('#5A4A22' if i<=6 else '#5A2620')};display:flex;align-items:center;justify-content:center;font-size:34px' class='h'>{i}</div>" for i in range(1, 10))
     shift = "".join(f"<div style='flex:1;height:64px;border-radius:6px;background:#33302A;display:flex;align-items:center;justify-content:center;font-size:22px;color:#CFC8B6'>{i}</div>" for i in range(16))
-    steps = ["Событие (разлом по типу → ближайший тайл)", "Сдвиг +1", "Искажённые тайлы +1 ступень, гнёзда выпускают врагов",
-             "Трупы встают: труп → Восставший", "Враги идут к ближайшему: шагов = Скорость",
-             "Нападение: каждый враг −Урон Здоровья", "Ночь +1"]
+    steps = ["Событие: жетон разлома на ближайший к Лагерю чистый тайл этого типа", "Сдвиг +1", "Все разломы +1 ступень (до III)",
+             "Трупы встают: труп → Восставший", "Монстры идут к ближайшему выжившему: шагов = Скорость",
+             "Нападение: каждый монстр −Урон Здоровья", "Разломы типа с карты выпускают монстров: I ходячий, II бегун, III бронированный. Новые стоят до следующей ночи",
+             "Ночь +1"]
     st = "".join(f"<div style='font-size:21px;padding:5px 0'><b style='color:#C8E04A'>{i}.</b> {s}</div>" for i, s in enumerate(steps, 1))
     body = f"""<div style='width:{W}px;height:{H}px;background:#211F1B;padding:34px;display:grid;grid-template-columns:1fr 560px;gap:34px'>
       <div>
-        <div class='h' style='font-size:52px'>НА ГРАНИ</div><div class='muted' style='font-size:20px'>пробник 0.5</div>
+        <div class='h' style='font-size:52px'>НА ГРАНИ</div><div class='muted' style='font-size:20px'>пробник 0.6</div>
         <div class='h' style='font-size:22px;letter-spacing:.1em;margin:28px 0 10px'>НОЧЬ · эвакуация после 9-й</div>
         <div style='display:flex;gap:8px'>{nights}</div>
         <div class='h' style='font-size:22px;letter-spacing:.1em;margin:28px 0 10px'>СДВИГ</div>
@@ -263,6 +357,14 @@ def main():
         m, w, h = shared_board(); shoot(pw, "shared_board.png", m, w, h)
         felt = ("<div style='width:2048px;height:2048px;background:#2A2622;"
                 "background-image:radial-gradient(circle at 50% 45%, #34302A 0%, #2A2622 55%, #1E1B18 100%)'></div>")
+        for t in HEX_TILES:
+            shoot(pw, f"hex/hex_front_{t[0]:02d}.png", page(hex_front(t), HX, HX), HX, HX)
+        for lvl in (0, 1, 2, 3):
+            shoot(pw, f"hex/hex_back_{lvl}.png", page(hex_back(lvl), HX, HX), HX, HX)
+        rifts = list(RIFT_MEMO)
+        shoot(pw, "memo_front.png", page(grid([memo_front(r) for r in rifts], 5, 1, CW, CH), 5*CW, CH), 5*CW, CH)
+        shoot(pw, "memo_back.png", page(memo_back().join(["<div class='cell' style='width:400px;height:560px'>", "</div>"]), CW, CH), CW, CH)
+        shoot(pw, "rift_token.png", page(rift_token(), 256, 256), 256, 256)
         shoot(pw, "table_surface.png", page(felt, 2048, 2048), 2048, 2048)
 
 if __name__ == "__main__":

@@ -2,6 +2,8 @@
 -- На грани: подготовка партии
 local TILE_BAG = "724c60"
 local CAMP = "a5cd68"
+local TABLE = "fcc554"
+local TABLE_SIZE = 140
 local NIGHT_DECKS = {
   {guid = "d69964", name = "Ночи 1–3"},
   {guid = "31e26b",   name = "Ночи 4–6"},
@@ -23,7 +25,24 @@ local MARKERS = {
 }
 local started = false
 
+-- Стол: большая заблокированная поверхность, подгоняется под TABLE_SIZE x TABLE_SIZE, верх на высоте 0.95
+function fitTable()
+  local t = getObjectFromGUID(TABLE)
+  if t == nil then return end
+  t.interactable = false
+  local size = t.getBounds().size
+  if size.x > 0 and math.abs(size.x - TABLE_SIZE) > 0.5 then
+    local sc = t.getScale()
+    local k = TABLE_SIZE / size.x
+    t.setScale({sc.x * k, sc.y, sc.z * k})
+  end
+  local b = t.getBounds()
+  local pos = t.getPosition()
+  t.setPosition({pos.x, pos.y + (0.95 - (b.center.y + b.size.y / 2)), pos.z})
+end
+
 function onLoad(state)
+  fitTable()
   if state ~= nil and state ~= "" then
     local ok, d = pcall(function() return JSON.decode(state) end)
     if ok and d ~= nil and d.started then started = true end

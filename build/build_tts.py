@@ -55,7 +55,24 @@ kb_names = crop_sheet("tokens_back.png", 2, 256, 256, 4, "token_back")
 TILE_LUA = r'''
 local value = nil
 
+-- Стол: большая заблокированная поверхность, подгоняется под TABLE_SIZE x TABLE_SIZE, верх на высоте 0.95
+function fitTable()
+  local t = getObjectFromGUID(TABLE)
+  if t == nil then return end
+  t.interactable = false
+  local size = t.getBounds().size
+  if size.x > 0 and math.abs(size.x - TABLE_SIZE) > 0.5 then
+    local sc = t.getScale()
+    local k = TABLE_SIZE / size.x
+    t.setScale({sc.x * k, sc.y, sc.z * k})
+  end
+  local b = t.getBounds()
+  local pos = t.getPosition()
+  t.setPosition({pos.x, pos.y + (0.95 - (b.center.y + b.size.y / 2)), pos.z})
+end
+
 function onLoad(state)
+  fitTable()
   if state ~= nil and state ~= "" then value = tonumber(state) end
   if value == nil then
     local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)
@@ -185,6 +202,11 @@ def board(img, transform, nick):
     return obj("Custom_Board", transform, nick, CustomImage={"ImageURL": url(img), "ImageSecondaryURL": "",
                                                             "ImageScalar": 1.0, "WidthScale": 0.0})
 objects.append(board("shared_board.png", tf(0, 1, 15, s=0.42), "Общее поле"))
+table_surf = board("table_surface.png", tf(0, 0.5, 0, s=1.8), "Стол")
+table_surf["Locked"] = True
+table_surf["Tooltip"] = False
+table_surf["Snap"] = False
+objects.append(table_surf)
 
 rules = (ROOT / "Правила_пробника.md").read_text(encoding="utf-8")
 objects.append(obj("Notecard", tf(28, 1, 6.5), "Правила пробника", rules))
@@ -198,6 +220,8 @@ GLOBAL_LUA = r'''
 -- На грани: подготовка партии
 local TILE_BAG = "__TILE_BAG__"
 local CAMP = "__CAMP__"
+local TABLE = "__TABLE__"
+local TABLE_SIZE = 140
 local NIGHT_DECKS = {
   {guid = "__EARLY__", name = "Ночи 1–3"},
   {guid = "__MID__",   name = "Ночи 4–6"},
@@ -219,7 +243,24 @@ local MARKERS = {
 }
 local started = false
 
+-- Стол: большая заблокированная поверхность, подгоняется под TABLE_SIZE x TABLE_SIZE, верх на высоте 0.95
+function fitTable()
+  local t = getObjectFromGUID(TABLE)
+  if t == nil then return end
+  t.interactable = false
+  local size = t.getBounds().size
+  if size.x > 0 and math.abs(size.x - TABLE_SIZE) > 0.5 then
+    local sc = t.getScale()
+    local k = TABLE_SIZE / size.x
+    t.setScale({sc.x * k, sc.y, sc.z * k})
+  end
+  local b = t.getBounds()
+  local pos = t.getPosition()
+  t.setPosition({pos.x, pos.y + (0.95 - (b.center.y + b.size.y / 2)), pos.z})
+end
+
 function onLoad(state)
+  fitTable()
   if state ~= nil and state ~= "" then
     local ok, d = pcall(function() return JSON.decode(state) end)
     if ok and d ~= nil and d.started then started = true end
@@ -354,7 +395,7 @@ function spawnPlayers(n)
   end
 end
 '''
-for key, val in {"__TILE_BAG__": tile_bag["GUID"], "__CAMP__": camp["GUID"],
+for key, val in {"__TILE_BAG__": tile_bag["GUID"], "__CAMP__": camp["GUID"], "__TABLE__": table_surf["GUID"],
                  "__EARLY__": layer_guids["Ранние"], "__MID__": layer_guids["Средние"],
                  "__LATE__": layer_guids["Поздние"], "__BOARD__": BOARD_JSON}.items():
     GLOBAL_LUA = GLOBAL_LUA.replace(key, val)
@@ -370,8 +411,8 @@ XML_UI = f'''<Panel id="setup" width="560" height="250" rectAlignment="MiddleCen
 </Panel>'''
 
 save = {
-    "SaveName": "На грани — пробник 0.3", "GameMode": "На грани", "Gravity": 0.5, "PlayArea": 1.0,
-    "Date": "", "Table": "Table_Custom", "TableURL": url("table_surface.png"), "Sky": "",
+    "SaveName": "На грани — пробник 0.4", "GameMode": "На грани", "Gravity": 0.5, "PlayArea": 1.0,
+    "Date": "", "Table": "Table_None", "TableURL": "", "Sky": "",
     "Note": rules, "Rules": "", "XmlUI": XML_UI,
     "LuaScript": GLOBAL_LUA, "LuaScriptState": "",
     "Grid": {"Type": 0, "Lines": False, "Color": {"r": 0, "g": 0, "b": 0}, "Opacity": 0.75,

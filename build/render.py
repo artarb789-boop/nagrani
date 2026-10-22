@@ -307,7 +307,7 @@ def player_board():
       </div>
       <div style='display:flex;flex-direction:column;gap:18px'>
         <div style='background:#1C1B19;border-radius:12px;padding:18px 22px'><div class='h' style='font-size:22px;margin-bottom:8px'>Действия</div>{acts_html}
-          <div style='font-size:17px;margin-top:10px;line-height:1.3;color:#E8A88E'>Непотраченная единица в конце Дня приводит ходячего на твой тайл.</div></div>
+</div>
       </div></div>"""
     return page(body, W, H), W, H
 

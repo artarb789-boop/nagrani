@@ -4,6 +4,8 @@ local TERRAIN = {"4d3c1a", "ca264e", "18b8ff", "25165e", "3031d0", "bb3b93", "1d
 local STACK_POS = {-14, 7}
 local CAMP = "a5cd68"
 local TABLE = "3bf3fa"
+local SHARED = "560a6f"
+local SHARED_W = 33.3
 local TABLE_SIZE = 140
 local NIGHT_DECKS = {
   {guid = "1fac61", name = "Ночи 1–3"},
@@ -15,9 +17,12 @@ local BOARD_JSON = [==[{"GUID": "", "Name": "Custom_Board", "Transform": {"posX"
 local BOARD_Z = -14
 local BOARD_GAP = 19
 -- Смещения от центра планшета (планшет 17.45 x 6.43, повёрнут на 180): +x вправо, +z к верху планшета
-local DICE_OFF = {{-4.5, 5.0}, {-3.5, 5.0}, {-2.5, 5.0}, {-1.5, 5.0}, {-0.5, 5.0}, {0.5, 5.0}}
+local BOARD_W = 17.45
+-- Кубики: смещение по x от центра планшета, над верхним краем
+local DICE_X = {-4.5, -3.5, -2.5, -1.5, -0.5, 0.5}
+-- Маркеры: доли ширины и высоты планшета от центра (+x вправо, +z к верху картинки)
 -- Голод 0, Жажда 0, Здоровье 5, Фокус 5, Изменение 0
-local MARK_OFF = {{-6.07, 0.75}, {-6.07, -0.03}, {-2.26, -0.82}, {-2.26, -1.6}, {-7.85, -2.84}}
+local MARK_F = {{-0.348, 0.104}, {-0.348, -0.004}, {-0.1295, -0.114}, {-0.1295, -0.222}, {-0.45, -0.3945}}
 local COLORS = {"White", "Red", "Blue", "Green", "Yellow"}
 local MARKERS = {
   {name = "Голод",     color = {0.93, 0.55, 0.2}},
@@ -46,6 +51,15 @@ end
 
 function onLoad(state)
   fitTable()
+  Wait.time(function()
+    local sb = getObjectFromGUID(SHARED)
+    if sb == nil then return end
+    local size = sb.getBounds().size
+    if size.x > 0 and math.abs(size.x - SHARED_W) > 0.1 then
+      local sc = sb.getScale()
+      sb.setScale({sc.x * SHARED_W / size.x, sc.y, sc.z * SHARED_W / size.x})
+    end
+  end, 2)
   if state ~= nil and state ~= "" then
     local ok, d = pcall(function() return JSON.decode(state) end)
     if ok and d ~= nil and d.started then started = true end
@@ -119,6 +133,41 @@ function startSupply(n)
   put("Еда", {0.93, 0.55, 0.2}, 1.5, 2 * n)
 end
 
+-- Планшет всегда одной ширины, как бы TTS ни масштабировал картинку
+function fitBoard(o)
+  local size = o.getBounds().size
+  if size.x > 0 and math.abs(size.x - BOARD_W) > 0.05 then
+    local sc = o.getScale()
+    local k = BOARD_W / size.x
+    o.setScale({sc.x * k, sc.y, sc.z * k})
+  end
+end
+
+function piecePositions(o)
+  local p = o.getPosition()
+  local size = o.getBounds().size
+  local dice, marks = {}, {}
+  for i, dx in ipairs(DICE_X) do dice[i] = {p.x + dx, 2, p.z + size.z / 2 + 1.4} end
+  for m, f in ipairs(MARK_F) do marks[m] = {p.x + f[1] * size.x, 2, p.z + f[2] * size.z} end
+  return dice, marks
+end
+
+function spawnPieces(o, color)
+  local dice, marks = piecePositions(o)
+  for i = 1, 6 do
+    spawnObject({
+      type = "Die_6", position = dice[i], rotation = {0, 180, 0}, scale = {0.64, 0.64, 0.64},
+      callback_function = function(d) d.setColorTint(stringColorToRGB(color)); d.setName("Кубик " .. color) end,
+    })
+  end
+  for m, mk in ipairs(MARKERS) do
+    spawnObject({
+      type = "BlockSquare", position = marks[m], rotation = {0, 180, 0}, scale = {0.28, 0.28, 0.28},
+      callback_function = function(b) b.setColorTint(mk.color); b.setName(mk.name .. " (" .. color .. ")") end,
+    })
+  end
+end
+
 function spawnPlayers(n)
   local camp = getObjectFromGUID(CAMP)
   local cp = {x = 0, y = 1, z = 0}
@@ -136,21 +185,11 @@ function spawnPlayers(n)
     local color = COLORS[p]
     spawnObjectJSON({
       json = BOARD_JSON, position = {x, 1.3, BOARD_Z}, rotation = {0, 180, 0},
-      callback_function = function(o) o.setName("Планшет: " .. color) end,
+      callback_function = function(o)
+        o.setName("Планшет: " .. color)
+        fitBoard(o)
+        Wait.frames(function() spawnPieces(o, color) end, 3)
+      end,
     })
-    for i = 1, 6 do
-      spawnObject({
-        type = "Die_6", position = {x + DICE_OFF[i][1], 2, BOARD_Z + DICE_OFF[i][2]}, rotation = {0, 180, 0},
-        scale = {0.64, 0.64, 0.64},
-        callback_function = function(o) o.setColorTint(stringColorToRGB(color)); o.setName("Кубик " .. color) end,
-      })
-    end
-    for m, mk in ipairs(MARKERS) do
-      spawnObject({
-        type = "BlockSquare", position = {x + MARK_OFF[m][1], 2, BOARD_Z + MARK_OFF[m][2]}, rotation = {0, 180, 0},
-        scale = {0.35, 0.35, 0.35},
-        callback_function = function(o) o.setColorTint(mk.color); o.setName(mk.name .. " (" .. color .. ")") end,
-      })
-    end
   end
 end

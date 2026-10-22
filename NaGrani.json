@@ -1,0 +1,3816 @@
+{
+ "SaveName": "На грани — пробник 0.2",
+ "GameMode": "На грани",
+ "Gravity": 0.5,
+ "PlayArea": 1.0,
+ "Date": "",
+ "Table": "Table_Custom",
+ "TableURL": "file:///C:/NaGrani/images/table_surface.png",
+ "Sky": "",
+ "Note": "# На грани — правила пробника 0.2\n\nПробные правила для первых партий. Где правила молчат — решайте за столом и записывайте, что решили. Временные решения помечены [ЗАГЛУШКА].\n\n## 1. О чём игра\nВы — выжившие после Сдвига: мир рвётся разломами, мёртвые встают, город мутирует. Нужно продержаться **9 ночей**. После 9-й ночи прилетает эвакуация: спасаются те, кто в этот момент стоит в Лагере.\nПока все играют вместе. Но если кто-то переполнит свою шкалу Изменения, он тайно получит карту Срыва — новую цель, которая может расходиться с целью группы.\n\n## 2. Подготовка (делает скрипт)\nПосле запуска появится окно «Сколько выживших?». Нажми число игроков — и скрипт:\n- выложит 4 случайных тайла вокруг Лагеря, повернув их так, чтобы к Лагерю вёл открытый край;\n- оставит в каждой колоде ночей по 3 случайные карты: «Ночи 1–3», «Ночи 4–6», «Ночи 7–9» (лишние уходят вправо, в игре не участвуют);\n- выдаст каждому игроку планшет, 6 кубиков его цвета и 4 маркера: Голод, Жажда, Заражение, Изменение;\n- поставит фишки выживших в Лагерь.\n\nВручную:\n1. Поставь маркеры шкал на 0 на своём планшете.\n2. Положи на общее поле 4 еды и 4 воды (бесконечные мешки слева).\n3. Чёрный маркер на Ночь 1, ещё один на Сдвиг 0.\n4. На каждый стартовый тайл поставь ходячих по числу «Угроза».\n\nСоло: выбери 1 — получишь двух выживших и управляешь обоими.\n\n## 3. Раунд\nКаждый раунд — это **День → Сумерки → Ночь**. Днём игроки ходят в любом порядке, можно договариваться и чередоваться.\n\n### 3.1 День: кубики\n1. Брось все свои кубики. Кубиков 6, минус ячейки, закрытые шрамами.\n2. Трать кубики на действия по одному. Значение кубика важно: простые действия берут любой кубик, сложные — высокий.\n3. Потраченный кубик отложи на планшет, он больше не используется этим Днём.\n4. **Единицы шумят:** каждая единица, которую ты не потратил к концу своего Дня, приводит ходячего на твой тайл. Единицу удобно потратить на Переход.\n\n**Усилие [пробное правило]:** можно сложить значения ровно двух кубиков в одно действие (например, 2 + 3 = 5 для Разведки). За это +1 Голод.\n\n### 3.2 Что можно делать Днём\n\n| Действие | Кубик | Что происходит |\n|---|---|---|\n| Переход | любой | Шагни на соседний тайл через открытый край. Через заштрихованный край пройти нельзя. |\n| Рывок | 5+ | Шагни на 2 тайла. +1 Жажда. |\n| Открыть тайл | любой | Шаг за открытый край туда, где тайла ещё нет (см. ниже). |\n| Разведка | 5+ | Посмотри тайл за открытым краем, не заходя туда (см. ниже). |\n| Обыск | ≥ порога тайла | Возьми 1 ресурс по типу лута, нажми «−» на счётчике запаса тайла. Запас 0 — обыскивать нечего. |\n| Бой | ≥ порога врага | Убей врага на своём тайле: ходячий 2+, бегун 4+, бронированный 6. Он становится трупом. Первый бой за День: +1 Голод. |\n| Разделать труп | любой | Убери труп насовсем, иначе ночью он встанет. |\n| Баррикада | любой | Только в Лагере. Положи жетон баррикады: ночью он отменяет 1 удар. Без материала баррикада держится одну ночь, с материалом — пока её не пробьют. |\n| Лечение | 4+ и медикамент | −2 Заражение. Можно лечить себя или другого на том же тайле. |\n| Отдых | 2 любых | −1 Изменение. |\n| Помочь | любой | Отдай кубик игроку на том же тайле. |\n| Отчаянно | — | Раз за День: возьми и брось 2 дополнительных кубика. +1 Изменение. |\n\n**Есть и пить можно в любой момент:** еда −2 Голод, вода −2 Жажда.\n\n**Тяжёлая местность:** зайти на искажённый тайл или в заросли — +1 Жажда.\n\n### 3.3 Открыть новый тайл\n1. Стоишь у открытого края, за которым пусто.\n2. Тяни случайный тайл из мешка «Тайлы города», клади обычной (светлой) стороной вверх.\n3. Поверни его так, чтобы к тебе смотрел открытый край. Счётчик запаса на тайле уже выставлен.\n4. Зайди на тайл и поставь на него ходячих по числу «Угроза».\n5. **Засада:** каждый враг на только что открытом тайле сразу бьёт тебя (удар = +1 Заражение).\n\n**Разведка** (кубик 5+) делает то же самое, но без захода: ты кладёшь тайл и врагов, засады нет. Можешь вместо этого вернуть тайл в мешок, если он тебе не нравится.\n\n### 3.4 Лут\n- **Припасы:** еда или вода на выбор. «Припасы (вода)» — только вода.\n- **Медицина:** медикамент.\n- **Материалы:** материал (для баррикад).\n- **Техника:** техника. [ЗАГЛУШКА: пока ни на что не тратится, понадобится для финалов]\n- **Редкое / мутаген:** мутаген. Использовать в любой момент: +2 кубика на этот День, +2 Заражение. [ЗАГЛУШКА мутаций]\n- «×2» — два ресурса за обыск, «любой ресурс» — на выбор.\n\nНайденное держи у себя (рядом с планшетом) или положи в Лагере в общий запас.\n\n### 3.5 Сумерки\n- **В Лагере:** каждый ест 1 еду и пьёт 1 воду из общего или своего запаса. Не поел — +1 Голод, не попил — +1 Жажда. Не хватает на всех — решайте вслух, кому.\n- **Вне Лагеря:** смотри Ночлег своего тайла.\n  - Укрытие: указанное на тайле восстановление, ночью на тебя не нападают.\n  - Открытое: +1 Голод, +1 Жажда.\n  - Опасное (в том числе любой искажённый тайл): +1 Голод, +1 Жажда и эффект тайла.\n\n### 3.6 Ночь (по порядку)\n1. **Событие.** Открой верхнюю карту из текущей колоды ночей и выполни её.\n   «Разлом: тип» — переверни ближайший к Лагерю тайл с этим типом искажения (тип подписан внизу тайла), который ещё не перевёрнут. Поставь на него чёрный маркер на ступень I и нажми «−» на счётчике запаса (на искажённой стороне запас меньше на 1). Подходящего тайла нет — Сдвиг +1.\n2. **Сдвиг +1.**\n3. **Искажённые тайлы растут.** Маркер на каждом перевёрнутом тайле +1 ступень (максимум III). Ступени накапливаются: на II работают и I, и II. Если ступень выпускает врага — поставь его.\n4. **Трупы встают.** Переверни все трупы на «Восставших». Восставший умирает от любого кубика 2+ и снова становится трупом.\n5. **Враги растут** (начиная со 2-й ночи). Ходячий переворачивается в бегуна, бегуна замени бронированным.\n6. **Враги идут.** Каждый враг делает шаг к ближайшему выжившему через открытые края. Бегун делает 2 шага.\n7. **Нападение.** Каждый враг на тайле с выжившим бьёт: ходячий, бегун и восставший — 1 удар, бронированный — 2 удара. **Удар = +1 Заражение** (укус). Удары распределяют сами выжившие на этом тайле. В Лагере каждая баррикада отменяет 1 удар. В Укрытии вне Лагеря нападения нет.\n8. Маркер ночи +1. После 9-й ночи — эвакуация, конец игры.\n\n## 4. Шкалы\nНа планшете три шкалы: **Голод, Жажда, Заражение**. Каждая от 0 до 5, и пока она не полна, ничего не происходит. Если шкала на 5 и нужно добавить ещё — **переполнение**. Шкала остаётся на 5, и каждое следующее деление вызывает переполнение снова.\n\n| Шкала | Переполнение |\n|---|---|\n| Голод | в следующий День бросаешь на 2 кубика меньше |\n| Жажда | теряешь сознание: следующий День пропускаешь, ночью лежишь на тайле без защиты |\n| Заражение | шрам: закрой одну ячейку кубика навсегда; шкала падает до 2 |\n\n**Изменение** (0–10) растёт от Отчаянно, событий и эффектов тайлов. Если оно на 10 и нужно добавить ещё — тайно возьми карту Срыва себе в руку. Теперь у тебя новая цель. Карту никому не показывай (кроме карты «Мост»).\n\n## 5. Смерть и конец игры\n- Если закрыты все 6 ячеек кубиков — выживший погибает. [ЗАГЛУШКА: может ли игрок вернуться новым выжившим]\n- После 9-й ночи спасаются все, кто стоит в Лагере.\n- Обычный выживший побеждает, если спасся. Игрок с картой Срыва побеждает, только если выполнил цель на карте.\n\n## 6. Что записывать на тесте\n- На какой ночи стало по-настоящему страшно.\n- Какие шкалы переполнялись, а какие не сдвинулись ни разу.\n- Как часто пользовались Усилием и не стало ли слишком легко.\n- Сколько минут занимает одна Ночь.\n- Какие тайлы и события оказались скучными.\n",
+ "Rules": "",
+ "XmlUI": "<Panel id=\"setup\" width=\"560\" height=\"250\" rectAlignment=\"MiddleCenter\" color=\"#1C1B19F0\" outline=\"#C8E04A\" outlineSize=\"2 2\">\n  <VerticalLayout padding=\"24 24 20 20\" spacing=\"14\" childForceExpandHeight=\"false\">\n    <Text fontSize=\"30\" fontStyle=\"Bold\" color=\"#EDE9DD\" preferredHeight=\"44\">На грани — сколько выживших?</Text>\n    <HorizontalLayout spacing=\"12\" preferredHeight=\"80\"><Button id=\"p1\" onClick=\"choosePlayers\" fontSize=\"34\" textColor=\"#EDE9DD\" colors=\"#3A3730|#5A5548|#2A2826|#3A3730\">1</Button><Button id=\"p2\" onClick=\"choosePlayers\" fontSize=\"34\" textColor=\"#EDE9DD\" colors=\"#3A3730|#5A5548|#2A2826|#3A3730\">2</Button><Button id=\"p3\" onClick=\"choosePlayers\" fontSize=\"34\" textColor=\"#EDE9DD\" colors=\"#3A3730|#5A5548|#2A2826|#3A3730\">3</Button><Button id=\"p4\" onClick=\"choosePlayers\" fontSize=\"34\" textColor=\"#EDE9DD\" colors=\"#3A3730|#5A5548|#2A2826|#3A3730\">4</Button><Button id=\"p5\" onClick=\"choosePlayers\" fontSize=\"34\" textColor=\"#EDE9DD\" colors=\"#3A3730|#5A5548|#2A2826|#3A3730\">5</Button></HorizontalLayout>\n    <Text fontSize=\"17\" color=\"#A7A293\" preferredHeight=\"50\">Появятся планшеты, кубики и маркеры. Вокруг Лагеря откроются 4 случайных тайла. Соло: выбери 1 — получишь двух выживших.</Text>\n  </VerticalLayout>\n</Panel>",
+ "LuaScript": "\n-- На грани: подготовка партии\nlocal TILE_BAG = \"724c60\"\nlocal CAMP = \"a5cd68\"\nlocal NIGHT_DECKS = {\n  {guid = \"d69964\", name = \"Ночи 1–3\"},\n  {guid = \"31e26b\",   name = \"Ночи 4–6\"},\n  {guid = \"e807c8\",  name = \"Ночи 7–9\"},\n}\nlocal OUT_POS = {33, 1.5, 0}\nlocal BOARD_JSON = [==[{\"GUID\": \"\", \"Name\": \"Custom_Board\", \"Transform\": {\"posX\": 0, \"posY\": 1, \"posZ\": 0, \"rotX\": 0, \"rotY\": 180, \"rotZ\": 0, \"scaleX\": 0.22, \"scaleY\": 0.22, \"scaleZ\": 0.22}, \"Nickname\": \"Планшет игрока\", \"Description\": \"\", \"GMNotes\": \"\", \"ColorDiffuse\": {\"r\": 1, \"g\": 1, \"b\": 1}, \"Locked\": false, \"Grid\": false, \"Snap\": true, \"Autoraise\": true, \"Sticky\": true, \"Tooltip\": true, \"GridProjection\": false, \"Hands\": false, \"LuaScript\": \"\", \"LuaScriptState\": \"\", \"CustomImage\": {\"ImageURL\": \"file:///C:/NaGrani/images/player_board.png\", \"ImageSecondaryURL\": \"\", \"ImageScalar\": 1.0, \"WidthScale\": 0.0}}]==]\nlocal BOARD_Z = -14\nlocal BOARD_GAP = 10\nlocal COLORS = {\"White\", \"Red\", \"Blue\", \"Green\", \"Yellow\"}\nlocal MARKERS = {\n  {name = \"Голод\",     color = {0.93, 0.55, 0.2}},\n  {name = \"Жажда\",     color = {0.25, 0.55, 0.95}},\n  {name = \"Заражение\", color = {0.55, 0.85, 0.2}},\n  {name = \"Изменение\", color = {0.1, 0.1, 0.1}},\n}\nlocal started = false\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then\n    local ok, d = pcall(function() return JSON.decode(state) end)\n    if ok and d ~= nil and d.started then started = true end\n  end\n  if started then UI.hide(\"setup\") end\nend\n\nfunction onSave() return JSON.encode({started = started}) end\n\nfunction choosePlayers(player, value, id)\n  if started then return end\n  local n = tonumber(string.sub(id, 2))\n  if n == nil then return end\n  started = true\n  UI.hide(\"setup\")\n  pcall(function() math.randomseed(os.time()) end)\n  placeStartTiles()\n  trimNightDecks()\n  local boards = n\n  if n == 1 then boards = 2 end\n  spawnPlayers(boards)\n  broadcastToAll(\"Выживших: \" .. boards .. \". Вокруг Лагеря открыты 4 тайла, колоды ночей готовы.\", {0.78, 0.88, 0.29})\nend\n\n-- Направления от Лагеря в мире: 0 = +z, 1 = +x, 2 = -z, 3 = -x.\n-- Край тайла i (N=0, E=1, S=2, W=3) после k поворотов на 90° смотрит в сторону (i + k) % 4.\nlocal EDGE = {N = 0, E = 1, S = 2, W = 3}\nlocal OFFSETS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}\n\nfunction placeStartTiles()\n  local bag = getObjectFromGUID(TILE_BAG)\n  local camp = getObjectFromGUID(CAMP)\n  if bag == nil or camp == nil then return end\n  bag.shuffle()\n  local cp = camp.getPosition()\n  local step = camp.getBounds().size.x + 0.1\n  for d = 0, 3 do\n    local off = OFFSETS[d + 1]\n    local pos = {cp.x + off[1] * step, cp.y + 0.6, cp.z + off[2] * step}\n    bag.takeObject({\n      position = pos, rotation = {0, 180, 0}, smooth = false,\n      callback_function = function(o) orientToCamp(o, d) end,\n    })\n  end\nend\n\nfunction orientToCamp(o, d)\n  local need = (d + 2) % 4\n  local edges = \"NESW\"\n  local ok, data = pcall(function() return JSON.decode(o.getGMNotes()) end)\n  if ok and data ~= nil and data.edges ~= nil then edges = data.edges end\n  local opts = {}\n  for c in string.gmatch(edges, \".\") do\n    if EDGE[c] ~= nil then table.insert(opts, EDGE[c]) end\n  end\n  if #opts == 0 then return end\n  -- предпочитаем поворот, при котором текст читается: 0, потом четверть оборота, потом вверх ногами\n  local pref = {[0] = 0, [1] = 1, [3] = 1, [2] = 2}\n  local bestK, bestScore = nil, 99\n  for _, i in ipairs(opts) do\n    local k = (need - i) % 4\n    if pref[k] < bestScore then bestK, bestScore = k, pref[k] end\n  end\n  o.setRotation({0, 180 + 90 * bestK, 0})\nend\n\nfunction trimNightDecks()\n  for idx, info in ipairs(NIGHT_DECKS) do\n    local deck = getObjectFromGUID(info.guid)\n    if deck ~= nil then\n      deck.shuffle()\n      local extra = deck.getQuantity() - 3\n      for j = 1, extra do\n        deck.takeObject({position = {OUT_POS[1], OUT_POS[2] + idx * 0.6 + j * 0.15, OUT_POS[3] - idx * 3.5},\n                         rotation = {0, 180, 180}, smooth = false})\n      end\n      deck.setName(info.name)\n    end\n  end\nend\n\nfunction spawnPlayers(n)\n  local camp = getObjectFromGUID(CAMP)\n  local cp = {x = 0, y = 1, z = 0}\n  if camp ~= nil then cp = camp.getPosition() end\n  for p = 1, n do\n    local pcolor = COLORS[p]\n    spawnObject({\n      type = \"PlayerPawn\", position = {cp.x - 1.6 + (p - 1) * 0.8, cp.y + 1.5, cp.z - 1}, rotation = {0, 180, 0},\n      scale = {0.6, 0.6, 0.6},\n      callback_function = function(o) o.setColorTint(stringColorToRGB(pcolor)); o.setName(\"Выживший \" .. pcolor) end,\n    })\n  end\n  for p = 1, n do\n    local x = (p - (n + 1) / 2) * BOARD_GAP\n    local color = COLORS[p]\n    spawnObjectJSON({\n      json = BOARD_JSON, position = {x, 1.3, BOARD_Z}, rotation = {0, 180, 0},\n      callback_function = function(o) o.setName(\"Планшет: \" .. color) end,\n    })\n    for i = 1, 6 do\n      spawnObject({\n        type = \"Die_6\", position = {x - 3.6 + (i - 1) * 1.2, 2, BOARD_Z - 4}, rotation = {0, 180, 0},\n        scale = {0.8, 0.8, 0.8},\n        callback_function = function(o) o.setColorTint(stringColorToRGB(color)); o.setName(\"Кубик \" .. color) end,\n      })\n    end\n    for m, mk in ipairs(MARKERS) do\n      spawnObject({\n        type = \"BlockSquare\", position = {x + 4 + (m - 1) * 0.8, 2, BOARD_Z - 4}, rotation = {0, 180, 0},\n        scale = {0.35, 0.35, 0.35},\n        callback_function = function(o) o.setColorTint(mk.color); o.setName(mk.name .. \" (\" .. color .. \")\") end,\n      })\n    end\n  end\nend\n",
+ "LuaScriptState": "",
+ "Grid": {
+  "Type": 0,
+  "Lines": false,
+  "Color": {
+   "r": 0,
+   "g": 0,
+   "b": 0
+  },
+  "Opacity": 0.75,
+  "ThickLines": false,
+  "Snapping": false,
+  "Offset": false,
+  "BothSnapping": false,
+  "xSize": 2.0,
+  "ySize": 2.0,
+  "PosOffset": {
+   "x": 0.0,
+   "y": 1.0,
+   "z": 0.0
+  }
+ },
+ "TabStates": {},
+ "VersionNumber": "v13.2.2",
+ "ObjectStates": [
+  {
+   "GUID": "a5cd68",
+   "Name": "Custom_Tile",
+   "Transform": {
+    "posX": 0,
+    "posY": 1,
+    "posZ": 0,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 3.0,
+    "scaleY": 3.0,
+    "scaleZ": 3.0
+   },
+   "Nickname": "Лагерь",
+   "Description": "Старт. Сумерки: еда и вода из общего запаса.",
+   "GMNotes": "{\"edges\": \"NESW\", \"zap\": 0}",
+   "ColorDiffuse": {
+    "r": 1,
+    "g": 1,
+    "b": 1
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "CustomImage": {
+    "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_00.png",
+    "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_00.png",
+    "ImageScalar": 1.0,
+    "WidthScale": 0.0,
+    "CustomTile": {
+     "Type": 0,
+     "Thickness": 0.15,
+     "Stackable": false,
+     "Stretch": true
+    }
+   }
+  },
+  {
+   "GUID": "724c60",
+   "Name": "Bag",
+   "Transform": {
+    "posX": -13,
+    "posY": 1.5,
+    "posZ": 7,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.3,
+    "scaleY": 1.3,
+    "scaleZ": 1.3
+   },
+   "Nickname": "Тайлы города",
+   "Description": "Тяни вслепую, клади обычной (светлой) стороной вверх.",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.35,
+    "g": 0.3,
+    "b": 0.25
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "4d3c1a",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Продуктовый магазин",
+     "Description": "Окраина · Обыск 3+ · Угроза 1 · Запас 3 · Укрытие: −1 Голод\nОборот: Гнилые прилавки (Заросли)",
+     "GMNotes": "{\"edges\": \"NES\", \"zap\": 3}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_01.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_01.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "ca264e",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Аптека на углу",
+     "Description": "Окраина · Обыск 3+ · Угроза 1 · Запас 3 · Укрытие: −1 Жажда\nОборот: Аптека в тумане (Туман)",
+     "GMNotes": "{\"edges\": \"NE\", \"zap\": 3}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_02.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_02.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "18b8ff",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Панельный дом",
+     "Description": "Окраина · Обыск 2+ · Угроза 1 · Запас 4 · Укрытие: −1 Голод\nОборот: Дом, где кричат (Эхо)",
+     "GMNotes": "{\"edges\": \"NESW\", \"zap\": 4}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_03.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_03.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "25165e",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Заправка",
+     "Description": "Окраина · Обыск 3+ · Угроза 1 · Запас 3 · Открытое: +1 Голод, +1 Жажда\nОборот: Мёртвая заправка (Аномалия)",
+     "GMNotes": "{\"edges\": \"NESW\", \"zap\": 3}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_04.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_04.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "3031d0",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Частные дома",
+     "Description": "Окраина · Обыск 3+ · Угроза 0 · Запас 3 · Укрытие: −1 Жажда (колодец)\nОборот: Заросшие дворы (Заросли)",
+     "GMNotes": "{\"edges\": \"NSW\", \"zap\": 3}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_05.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_05.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "bb3b93",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Перекрёсток",
+     "Description": "Окраина · Обыск 4+ · Угроза 2 · Запас 1 · Открытое: +1 Голод, +1 Жажда\nОборот: Слепой перекрёсток (Туман)",
+     "GMNotes": "{\"edges\": \"NESW\", \"zap\": 1}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_06.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_06.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "1db208",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Парк",
+     "Description": "Окраина · Обыск 4+ · Угроза 1 · Запас 2 · Открытое: +1 Голод, +1 Жажда\nОборот: Парк-гнездо (Гнездо)",
+     "GMNotes": "{\"edges\": \"NESW\", \"zap\": 2}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_07.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_07.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "6deceb",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Гаражи",
+     "Description": "Окраина · Обыск 3+ · Угроза 1 · Запас 3 · Укрытие: без восстановления\nОборот: Логово (Гнездо)",
+     "GMNotes": "{\"edges\": \"N\", \"zap\": 3}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_08.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_08.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "1332a1",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Церковь",
+     "Description": "Окраина · Обыск 4+ · Угроза 0 · Запас 2 · Укрытие: −1 Изменение\nОборот: Колокол (Эхо)",
+     "GMNotes": "{\"edges\": \"NS\", \"zap\": 2}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_09.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_09.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "2c0146",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Склад",
+     "Description": "Промзона · Обыск 4+ · Угроза 2 · Запас 4 · Открытое: +1 Голод, +1 Жажда\nОборот: Улей (Гнездо)",
+     "GMNotes": "{\"edges\": \"ESW\", \"zap\": 4}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_10.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_10.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "de06ce",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Лаборатория",
+     "Description": "Промзона · Обыск 5+ · Угроза 2 · Запас 2 · Укрытие: без восстановления\nОборот: Лаборатория-разлом (Аномалия)",
+     "GMNotes": "{\"edges\": \"SW\", \"zap\": 2}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_11.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_11.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "d61aa9",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Трамвайное депо",
+     "Description": "Промзона · Обыск 3+ · Угроза 1 · Запас 3 · Открытое: +1 Голод, +1 Жажда\nОборот: Депо голосов (Эхо)",
+     "GMNotes": "{\"edges\": \"NESW\", \"zap\": 3}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_12.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_12.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "23c417",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Котельная",
+     "Description": "Промзона · Обыск 3+ · Угроза 1 · Запас 3 · Укрытие: −1 Жажда (кипяток)\nОборот: Котёл (Гнездо)",
+     "GMNotes": "{\"edges\": \"NW\", \"zap\": 3}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_13.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_13.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "7b382e",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Свалка",
+     "Description": "Промзона · Обыск 2+ · Угроза 2 · Запас 5 · Открытое: +1 Голод, +1 Жажда\nОборот: Ржавые лозы (Заросли)",
+     "GMNotes": "{\"edges\": \"NEW\", \"zap\": 5}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_14.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_14.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "2e71ef",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Водонапорная башня",
+     "Description": "Промзона · Обыск 4+ · Угроза 0 · Запас 2 · Укрытие: −2 Жажда\nОборот: Гнилая вода (Заросли)",
+     "GMNotes": "{\"edges\": \"S\", \"zap\": 2}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_15.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_15.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "d95a94",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Подстанция",
+     "Description": "Промзона · Обыск 4+ · Угроза 1 · Запас 3 · Опасное: +1 Голод, +1 Жажда, +1 Заражение\nОборот: Узел (Аномалия)",
+     "GMNotes": "{\"edges\": \"NES\", \"zap\": 3}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_16.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_16.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "1e43bb",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "Химзавод",
+     "Description": "Промзона · Обыск 5+ · Угроза 2 · Запас 3 · Опасное: +1 Голод, +1 Жажда, +1 Заражение\nОборот: Кислотный туман (Туман)",
+     "GMNotes": "{\"edges\": \"EW\", \"zap\": 3}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_17.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_17.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    },
+    {
+     "GUID": "3f62f8",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 3.0,
+      "scaleY": 3.0,
+      "scaleZ": 3.0
+     },
+     "Nickname": "КПП завода",
+     "Description": "Промзона · Обыск 3+ · Угроза 1 · Запас 2 · Укрытие: без восстановления\nОборот: Мёртвый эфир (Эхо)",
+     "GMNotes": "{\"edges\": \"NESW\", \"zap\": 2}",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "\nlocal value = nil\n\nfunction onLoad(state)\n  if state ~= nil and state ~= \"\" then value = tonumber(state) end\n  if value == nil then\n    local ok, d = pcall(function() return JSON.decode(self.getGMNotes()) end)\n    if ok and d ~= nil and d.zap ~= nil then value = d.zap else value = 0 end\n  end\n  Wait.frames(draw, 2)\nend\n\nfunction onSave() return tostring(value) end\n\nfunction noop() end\nfunction plus() value = value + 1; draw() end\nfunction minus() if value > 0 then value = value - 1 end; draw() end\n\nfunction draw()\n  self.clearButtons()\n  local b = self.getBounds()\n  local s = self.getScale()\n  local h = (b.size.x / s.x) / 2\n  if h <= 0 then h = 1 end\n  local z = h * 0.80\n  local sc = {h * 0.22, 1, h * 0.22}\n  local sides = {\n    {y = 0.2,  rot = {0, 0, 0},   dir = -1},\n    {y = -0.2, rot = {0, 0, 180}, dir = 1},\n  }\n  for _, sd in ipairs(sides) do\n    local x0 = sd.dir * h * 0.52\n    local step = sd.dir * h * 0.20\n    self.createButton({click_function = \"minus\", function_owner = self, label = \"−\",\n      position = {x0, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас −1\"})\n    self.createButton({click_function = \"noop\", function_owner = self, label = tostring(value),\n      position = {x0 + step, sd.y, z}, rotation = sd.rot, width = 420, height = 380, font_size = 320,\n      scale = sc, color = {0.81, 0.9, 0.63}, font_color = {0.1, 0.12, 0.05}, tooltip = \"Запас тайла\"})\n    self.createButton({click_function = \"plus\", function_owner = self, label = \"+\",\n      position = {x0 + step * 2, sd.y, z}, rotation = sd.rot, width = 380, height = 380, font_size = 320,\n      scale = sc, color = {0.12, 0.12, 0.1}, font_color = {0.93, 0.91, 0.86}, tooltip = \"Запас +1\"})\n  end\nend\n",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/tile_front_18.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/tile_back_18.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.15,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    }
+   ]
+  },
+  {
+   "GUID": "d69964",
+   "Name": "Deck",
+   "Transform": {
+    "posX": 21,
+    "posY": 1.2,
+    "posZ": 12,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 180,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "События: Ранние",
+   "Description": "Тяни по одной карте каждую ночь: сначала Ночи 1–3, потом 4–6, потом 7–9.",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 1,
+    "g": 1,
+    "b": 1
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "HideWhenFaceDown": true,
+   "SidewaysCard": false,
+   "DeckIDs": [
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206
+   ],
+   "CustomDeck": {
+    "2": {
+     "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+     "BackURL": "file:///C:/NaGrani/images/events_back.png",
+     "NumWidth": 7,
+     "NumHeight": 4,
+     "BackIsHidden": true,
+     "UniqueBack": true,
+     "Type": 0
+    }
+   },
+   "ContainedObjects": [
+    {
+     "GUID": "1fac61",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Тихая ночь",
+     "Description": "Ранние · Мир: — · Выживание: все в Лагере −1 Изменение",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 200,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "cb19b4",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Жаркая ночь",
+     "Description": "Ранние · Мир: — · Выживание: все +1 Жажда",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 201,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "1963c5",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Первые трещины",
+     "Description": "Ранние · Мир: разлом · Выживание: —",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 202,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "7131a3",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Бродяги",
+     "Description": "Ранние · Мир: +1 ходячий на каждый открытый тайл с Угрозой 2 · Выживание: —",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 203,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "17d9af",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Холодный дождь",
+     "Description": "Ранние · Мир: разлом · Выживание: вне Лагеря +1 Голод; в Лагерь +2 воды",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 204,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "442f7d",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Голоса в рации",
+     "Description": "Ранние · Мир: — · Выживание: один игрок может ответить: +1 Изменение. Он первым узнает, куда прилетит эвакуация",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 205,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "9447ab",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Последняя канистра",
+     "Description": "Ранние · Мир: — · Выживание: вода на одного (−3 Жажды). Кому — решает группа. Не договорились за минуту — вода проливается",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 206,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "GUID": "31e26b",
+   "Name": "Deck",
+   "Transform": {
+    "posX": 24,
+    "posY": 1.2,
+    "posZ": 12,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 180,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "События: Средние",
+   "Description": "Тяни по одной карте каждую ночь: сначала Ночи 1–3, потом 4–6, потом 7–9.",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 1,
+    "g": 1,
+    "b": 1
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "HideWhenFaceDown": true,
+   "SidewaysCard": false,
+   "DeckIDs": [
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213
+   ],
+   "CustomDeck": {
+    "2": {
+     "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+     "BackURL": "file:///C:/NaGrani/images/events_back.png",
+     "NumWidth": 7,
+     "NumHeight": 4,
+     "BackIsHidden": true,
+     "UniqueBack": true,
+     "Type": 0
+    }
+   },
+   "ContainedObjects": [
+    {
+     "GUID": "49dbcd",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Вой из тумана",
+     "Description": "Средние · Мир: все тайлы с искажением Туман растут на ступень · Выживание: +1 Изменение тем, кто рядом с туманом",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 207,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "3c4f43",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Порченые запасы",
+     "Description": "Средние · Мир: — · Выживание: общий запас еды −2. Личных запасов не касается — можно промолчать",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 208,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "9df154",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Раскол земли",
+     "Description": "Средние · Мир: разлом; Сдвиг +1 · Выживание: —",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 209,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "5c882b",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Чужие следы",
+     "Description": "Средние · Мир: с каждого Укрытия на карте снимается 1 запас · Выживание: —",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 210,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "34c3b7",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Голодный город",
+     "Description": "Средние · Мир: враги в 2 тайлах от Лагеря делают шаг к Лагерю · Выживание: все +1 Голод",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 211,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "6030a1",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Споры в воздухе",
+     "Description": "Средние · Мир: разлом · Выживание: все на искажённых тайлах +2 Заражение",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 212,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "beaae4",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Раненый незнакомец",
+     "Description": "Средние · Мир: — · Выживание: взять в Лагерь (−2 еды, следующей ночью вытяни «Последствие») или оставить (+1 Изменение всем)",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 213,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "GUID": "e807c8",
+   "Name": "Deck",
+   "Transform": {
+    "posX": 27,
+    "posY": 1.2,
+    "posZ": 12,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 180,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "События: Поздние",
+   "Description": "Тяни по одной карте каждую ночь: сначала Ночи 1–3, потом 4–6, потом 7–9.",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 1,
+    "g": 1,
+    "b": 1
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "HideWhenFaceDown": true,
+   "SidewaysCard": false,
+   "DeckIDs": [
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220
+   ],
+   "CustomDeck": {
+    "2": {
+     "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+     "BackURL": "file:///C:/NaGrani/images/events_back.png",
+     "NumWidth": 7,
+     "NumHeight": 4,
+     "BackIsHidden": true,
+     "UniqueBack": true,
+     "Type": 0
+    }
+   },
+   "ContainedObjects": [
+    {
+     "GUID": "2025e0",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Гнёзда просыпаются",
+     "Description": "Поздние · Мир: разлом; все Гнёзда сразу выпускают по врагу · Выживание: —",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 214,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "1e840b",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Долгая ночь",
+     "Description": "Поздние · Мир: вытяни ещё одну карту события · Выживание: все +1 Голод",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 215,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "69736b",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Эхо",
+     "Description": "Поздние · Мир: разлом · Выживание: все +1 Изменение",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 216,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "fe2a0a",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Волна",
+     "Description": "Поздние · Мир: все враги поднимаются на ступень ещё раз · Выживание: —",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 217,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "daed60",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Тишина перед бурей",
+     "Description": "Поздние · Мир: ничего · Выживание: следующей ночью вытяни две карты",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 218,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "a0d7e5",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Ночь без сна",
+     "Description": "Поздние · Мир: — · Выживание: все +1 Голод; кто ночует один, +2 Изменение",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 219,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "ee635e",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Сдвиг ширится",
+     "Description": "Поздние · Мир: два разлома сразу · Выживание: —",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 220,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "GUID": "7cfa37",
+   "Name": "Deck",
+   "Transform": {
+    "posX": 24,
+    "posY": 1.2,
+    "posZ": 6.5,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 180,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "События: Последствия",
+   "Description": "Тяни по одной карте каждую ночь: сначала Ночи 1–3, потом 4–6, потом 7–9.",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 1,
+    "g": 1,
+    "b": 1
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "HideWhenFaceDown": true,
+   "SidewaysCard": false,
+   "DeckIDs": [
+    221,
+    222,
+    223,
+    224
+   ],
+   "CustomDeck": {
+    "2": {
+     "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+     "BackURL": "file:///C:/NaGrani/images/events_back.png",
+     "NumWidth": 7,
+     "NumHeight": 4,
+     "BackIsHidden": true,
+     "UniqueBack": true,
+     "Type": 0
+    }
+   },
+   "ContainedObjects": [
+    {
+     "GUID": "b92152",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Он был помощником",
+     "Description": "Последствия · Мир: — · Выживание: незнакомец остаётся: раз за День игрок в Лагере может взять у него кубик со значением 4",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 221,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "997b0f",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Он был вором",
+     "Description": "Последствия · Мир: — · Выживание: ушёл ночью: общий запас −2 еды и −2 воды",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 222,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "7f31c4",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Он был заражён",
+     "Description": "Последствия · Мир: — · Выживание: все в Лагере +2 Заражение; незнакомец уходит",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 223,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "5c0a63",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Он был мутантом",
+     "Description": "Последствия · Мир: встаёт бегуном прямо в Лагере и нападает первым · Выживание: —",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 224,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "2": {
+       "FaceURL": "file:///C:/NaGrani/images/events_front.png",
+       "BackURL": "file:///C:/NaGrani/images/events_back.png",
+       "NumWidth": 7,
+       "NumHeight": 4,
+       "BackIsHidden": true,
+       "UniqueBack": true,
+       "Type": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "GUID": "5475e9",
+   "Name": "Deck",
+   "Transform": {
+    "posX": 21,
+    "posY": 1.2,
+    "posZ": 6.5,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 180,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Срыв",
+   "Description": "Переполнил Изменение — тайно возьми карту себе в руку.",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 1,
+    "g": 1,
+    "b": 1
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "HideWhenFaceDown": true,
+   "SidewaysCard": false,
+   "DeckIDs": [
+    300,
+    301,
+    302,
+    303,
+    304,
+    305,
+    306,
+    307,
+    308
+   ],
+   "CustomDeck": {
+    "3": {
+     "FaceURL": "file:///C:/NaGrani/images/sryv_front.png",
+     "BackURL": "file:///C:/NaGrani/images/sryv_back.png",
+     "NumWidth": 5,
+     "NumHeight": 2,
+     "BackIsHidden": true,
+     "UniqueBack": false,
+     "Type": 0
+    }
+   },
+   "ContainedObjects": [
+    {
+     "GUID": "29e8e6",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Одиночка",
+     "Description": "человек: Спастись, если вместе с тобой спаслись не больше двух выживших.",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 300,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "3": {
+       "FaceURL": "file:///C:/NaGrani/images/sryv_front.png",
+       "BackURL": "file:///C:/NaGrani/images/sryv_back.png",
+       "NumWidth": 5,
+       "NumHeight": 2,
+       "BackIsHidden": true,
+       "UniqueBack": false,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "99ba40",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Привязанность",
+     "Description": "человек: Тайно запиши одного выжившего. Он должен спастись, даже если ты погибнешь.",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 301,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "3": {
+       "FaceURL": "file:///C:/NaGrani/images/sryv_front.png",
+       "BackURL": "file:///C:/NaGrani/images/sryv_back.png",
+       "NumWidth": 5,
+       "NumHeight": 2,
+       "BackIsHidden": true,
+       "UniqueBack": false,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "fd7fe4",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Скопидом",
+     "Description": "человек: К эвакуации у тебя лично должно быть больше еды, чем в общем запасе.",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 302,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "3": {
+       "FaceURL": "file:///C:/NaGrani/images/sryv_front.png",
+       "BackURL": "file:///C:/NaGrani/images/sryv_back.png",
+       "NumWidth": 5,
+       "NumHeight": 2,
+       "BackIsHidden": true,
+       "UniqueBack": false,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "afdc0b",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Искупление",
+     "Description": "человек: Погибнуть ночью на одном тайле с другим выжившим, приняв удары на себя.",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 303,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "3": {
+       "FaceURL": "file:///C:/NaGrani/images/sryv_front.png",
+       "BackURL": "file:///C:/NaGrani/images/sryv_back.png",
+       "NumWidth": 5,
+       "NumHeight": 2,
+       "BackIsHidden": true,
+       "UniqueBack": false,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "e5cd98",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Голод",
+     "Description": "мутант: Разделать хотя бы один труп выжившего. Спасаться не обязательно.",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 304,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "3": {
+       "FaceURL": "file:///C:/NaGrani/images/sryv_front.png",
+       "BackURL": "file:///C:/NaGrani/images/sryv_back.png",
+       "NumWidth": 5,
+       "NumHeight": 2,
+       "BackIsHidden": true,
+       "UniqueBack": false,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "936c94",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Ассимиляция",
+     "Description": "мутант: Использовать мутаген 3 раза за игру (считая уже использованный).",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 305,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "3": {
+       "FaceURL": "file:///C:/NaGrani/images/sryv_front.png",
+       "BackURL": "file:///C:/NaGrani/images/sryv_back.png",
+       "NumWidth": 5,
+       "NumHeight": 2,
+       "BackIsHidden": true,
+       "UniqueBack": false,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "257a95",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Носитель",
+     "Description": "мутант: Спастись нераскрытым. Если удалось — всем спасшимся +3 Заражение в эпилоге.",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 306,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "3": {
+       "FaceURL": "file:///C:/NaGrani/images/sryv_front.png",
+       "BackURL": "file:///C:/NaGrani/images/sryv_back.png",
+       "NumWidth": 5,
+       "NumHeight": 2,
+       "BackIsHidden": true,
+       "UniqueBack": false,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "3c731e",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Зов разлома",
+     "Description": "мутант: В конце 9-й ночи стоять на искажённом тайле ступени III.",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 307,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "3": {
+       "FaceURL": "file:///C:/NaGrani/images/sryv_front.png",
+       "BackURL": "file:///C:/NaGrani/images/sryv_back.png",
+       "NumWidth": 5,
+       "NumHeight": 2,
+       "BackIsHidden": true,
+       "UniqueBack": false,
+       "Type": 0
+      }
+     }
+    },
+    {
+     "GUID": "d61431",
+     "Name": "Card",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 180,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "scaleZ": 1.0
+     },
+     "Nickname": "Мост",
+     "Description": "мутант: Открыто показать эту карту и спастись вместе с хотя бы одним выжившим.",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CardID": 308,
+     "HideWhenFaceDown": true,
+     "SidewaysCard": false,
+     "CustomDeck": {
+      "3": {
+       "FaceURL": "file:///C:/NaGrani/images/sryv_front.png",
+       "BackURL": "file:///C:/NaGrani/images/sryv_back.png",
+       "NumWidth": 5,
+       "NumHeight": 2,
+       "BackIsHidden": true,
+       "UniqueBack": false,
+       "Type": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "GUID": "4dd0ea",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -31.0,
+    "posY": 1.5,
+    "posZ": 13.0,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Ходячий (оборот: Бегун)",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.4,
+    "g": 0.2,
+    "b": 0.15
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "af21f0",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.8,
+      "scaleY": 0.8,
+      "scaleZ": 0.8
+     },
+     "Nickname": "Ходячий",
+     "Description": "Ходячий (оборот: Бегун)",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/token_front_00.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/token_back_00.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.2,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    }
+   ]
+  },
+  {
+   "GUID": "d7e8d8",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -28.4,
+    "posY": 1.5,
+    "posZ": 13.0,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Бегун (оборот: Броня)",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.4,
+    "g": 0.2,
+    "b": 0.15
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "fa595f",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.8,
+      "scaleY": 0.8,
+      "scaleZ": 0.8
+     },
+     "Nickname": "Бегун",
+     "Description": "Бегун (оборот: Броня)",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/token_front_01.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/token_back_01.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.2,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    }
+   ]
+  },
+  {
+   "GUID": "27bddf",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -25.8,
+    "posY": 1.5,
+    "posZ": 13.0,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Броня",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.4,
+    "g": 0.2,
+    "b": 0.15
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "1412f9",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.8,
+      "scaleY": 0.8,
+      "scaleZ": 0.8
+     },
+     "Nickname": "Броня",
+     "Description": "Броня",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/token_front_02.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/token_back_02.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.2,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    }
+   ]
+  },
+  {
+   "GUID": "ae2484",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -31.0,
+    "posY": 1.5,
+    "posZ": 10.2,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Труп (оборот: Восставший)",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.4,
+    "g": 0.2,
+    "b": 0.15
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "a0a383",
+     "Name": "Custom_Tile",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.8,
+      "scaleY": 0.8,
+      "scaleZ": 0.8
+     },
+     "Nickname": "Труп",
+     "Description": "Труп (оборот: Восставший)",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": "",
+     "CustomImage": {
+      "ImageURL": "file:///C:/NaGrani/images/tiles/token_front_03.png",
+      "ImageSecondaryURL": "file:///C:/NaGrani/images/tiles/token_back_03.png",
+      "ImageScalar": 1.0,
+      "WidthScale": 0.0,
+      "CustomTile": {
+       "Type": 0,
+       "Thickness": 0.2,
+       "Stackable": false,
+       "Stretch": true
+      }
+     }
+    }
+   ]
+  },
+  {
+   "GUID": "fe4c28",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -28.4,
+    "posY": 1.5,
+    "posZ": 10.2,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Еда",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.93,
+    "g": 0.55,
+    "b": 0.2
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "b34a94",
+     "Name": "BlockSquare",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.45,
+      "scaleY": 0.45,
+      "scaleZ": 0.45
+     },
+     "Nickname": "Еда",
+     "Description": "",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 0.93,
+      "g": 0.55,
+      "b": 0.2
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": ""
+    }
+   ]
+  },
+  {
+   "GUID": "2334e5",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -25.8,
+    "posY": 1.5,
+    "posZ": 10.2,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Вода",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.25,
+    "g": 0.55,
+    "b": 0.95
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "e993be",
+     "Name": "BlockSquare",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.45,
+      "scaleY": 0.45,
+      "scaleZ": 0.45
+     },
+     "Nickname": "Вода",
+     "Description": "",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 0.25,
+      "g": 0.55,
+      "b": 0.95
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": ""
+    }
+   ]
+  },
+  {
+   "GUID": "8a357b",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -31.0,
+    "posY": 1.5,
+    "posZ": 7.4,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Медикамент",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.95,
+    "g": 0.95,
+    "b": 0.95
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "2febd0",
+     "Name": "BlockSquare",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.45,
+      "scaleY": 0.45,
+      "scaleZ": 0.45
+     },
+     "Nickname": "Медикамент",
+     "Description": "",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 0.95,
+      "g": 0.95,
+      "b": 0.95
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": ""
+    }
+   ]
+  },
+  {
+   "GUID": "2147ad",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -28.4,
+    "posY": 1.5,
+    "posZ": 7.4,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Материал",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.5,
+    "g": 0.33,
+    "b": 0.2
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "f2bd04",
+     "Name": "BlockSquare",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.45,
+      "scaleY": 0.45,
+      "scaleZ": 0.45
+     },
+     "Nickname": "Материал",
+     "Description": "",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 0.5,
+      "g": 0.33,
+      "b": 0.2
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": ""
+    }
+   ]
+  },
+  {
+   "GUID": "9e84db",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -25.8,
+    "posY": 1.5,
+    "posZ": 7.4,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Техника",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.95,
+    "g": 0.85,
+    "b": 0.2
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "1f1010",
+     "Name": "BlockSquare",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.45,
+      "scaleY": 0.45,
+      "scaleZ": 0.45
+     },
+     "Nickname": "Техника",
+     "Description": "",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 0.95,
+      "g": 0.85,
+      "b": 0.2
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": ""
+    }
+   ]
+  },
+  {
+   "GUID": "91b681",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -31.0,
+    "posY": 1.5,
+    "posZ": 4.600000000000001,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Мутаген",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.6,
+    "g": 0.9,
+    "b": 0.2
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "e42b06",
+     "Name": "BlockSquare",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.45,
+      "scaleY": 0.45,
+      "scaleZ": 0.45
+     },
+     "Nickname": "Мутаген",
+     "Description": "",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 0.6,
+      "g": 0.9,
+      "b": 0.2
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": ""
+    }
+   ]
+  },
+  {
+   "GUID": "b1aaac",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -28.4,
+    "posY": 1.5,
+    "posZ": 4.600000000000001,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Баррикада",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.3,
+    "g": 0.2,
+    "b": 0.12
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "c58674",
+     "Name": "BlockSquare",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.45,
+      "scaleY": 0.45,
+      "scaleZ": 0.45
+     },
+     "Nickname": "Баррикада",
+     "Description": "",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 0.3,
+      "g": 0.2,
+      "b": 0.12
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": ""
+    }
+   ]
+  },
+  {
+   "GUID": "ec6353",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -25.8,
+    "posY": 1.5,
+    "posZ": 4.600000000000001,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Маркер ступени / Сдвига / Ночи",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.08,
+    "g": 0.08,
+    "b": 0.08
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "0b8d5e",
+     "Name": "BlockSquare",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.45,
+      "scaleY": 0.45,
+      "scaleZ": 0.45
+     },
+     "Nickname": "Маркер ступени / Сдвига / Ночи",
+     "Description": "",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 0.08,
+      "g": 0.08,
+      "b": 0.08
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": ""
+    }
+   ]
+  },
+  {
+   "GUID": "560a6f",
+   "Name": "Infinite_Bag",
+   "Transform": {
+    "posX": -31.0,
+    "posY": 1.5,
+    "posZ": 1.8000000000000007,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Кубики d6",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 0.9,
+    "g": 0.9,
+    "b": 0.9
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "ContainedObjects": [
+    {
+     "GUID": "b5ff64",
+     "Name": "Die_6",
+     "Transform": {
+      "posX": 0,
+      "posY": 1,
+      "posZ": 0,
+      "rotX": 0,
+      "rotY": 180,
+      "rotZ": 0,
+      "scaleX": 0.8,
+      "scaleY": 0.8,
+      "scaleZ": 0.8
+     },
+     "Nickname": "Кубик",
+     "Description": "",
+     "GMNotes": "",
+     "ColorDiffuse": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+     },
+     "Locked": false,
+     "Grid": false,
+     "Snap": true,
+     "Autoraise": true,
+     "Sticky": true,
+     "Tooltip": true,
+     "GridProjection": false,
+     "Hands": false,
+     "LuaScript": "",
+     "LuaScriptState": ""
+    }
+   ]
+  },
+  {
+   "GUID": "3bf3fa",
+   "Name": "Custom_Board",
+   "Transform": {
+    "posX": 0,
+    "posY": 1,
+    "posZ": 15,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 0.42,
+    "scaleY": 0.42,
+    "scaleZ": 0.42
+   },
+   "Nickname": "Общее поле",
+   "Description": "",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 1,
+    "g": 1,
+    "b": 1
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": "",
+   "CustomImage": {
+    "ImageURL": "file:///C:/NaGrani/images/shared_board.png",
+    "ImageSecondaryURL": "",
+    "ImageScalar": 1.0,
+    "WidthScale": 0.0
+   }
+  },
+  {
+   "GUID": "fcc554",
+   "Name": "Notecard",
+   "Transform": {
+    "posX": 28,
+    "posY": 1,
+    "posZ": 6.5,
+    "rotX": 0,
+    "rotY": 180,
+    "rotZ": 0,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+   },
+   "Nickname": "Правила пробника",
+   "Description": "# На грани — правила пробника 0.2\n\nПробные правила для первых партий. Где правила молчат — решайте за столом и записывайте, что решили. Временные решения помечены [ЗАГЛУШКА].\n\n## 1. О чём игра\nВы — выжившие после Сдвига: мир рвётся разломами, мёртвые встают, город мутирует. Нужно продержаться **9 ночей**. После 9-й ночи прилетает эвакуация: спасаются те, кто в этот момент стоит в Лагере.\nПока все играют вместе. Но если кто-то переполнит свою шкалу Изменения, он тайно получит карту Срыва — новую цель, которая может расходиться с целью группы.\n\n## 2. Подготовка (делает скрипт)\nПосле запуска появится окно «Сколько выживших?». Нажми число игроков — и скрипт:\n- выложит 4 случайных тайла вокруг Лагеря, повернув их так, чтобы к Лагерю вёл открытый край;\n- оставит в каждой колоде ночей по 3 случайные карты: «Ночи 1–3», «Ночи 4–6», «Ночи 7–9» (лишние уходят вправо, в игре не участвуют);\n- выдаст каждому игроку планшет, 6 кубиков его цвета и 4 маркера: Голод, Жажда, Заражение, Изменение;\n- поставит фишки выживших в Лагерь.\n\nВручную:\n1. Поставь маркеры шкал на 0 на своём планшете.\n2. Положи на общее поле 4 еды и 4 воды (бесконечные мешки слева).\n3. Чёрный маркер на Ночь 1, ещё один на Сдвиг 0.\n4. На каждый стартовый тайл поставь ходячих по числу «Угроза».\n\nСоло: выбери 1 — получишь двух выживших и управляешь обоими.\n\n## 3. Раунд\nКаждый раунд — это **День → Сумерки → Ночь**. Днём игроки ходят в любом порядке, можно договариваться и чередоваться.\n\n### 3.1 День: кубики\n1. Брось все свои кубики. Кубиков 6, минус ячейки, закрытые шрамами.\n2. Трать кубики на действия по одному. Значение кубика важно: простые действия берут любой кубик, сложные — высокий.\n3. Потраченный кубик отложи на планшет, он больше не используется этим Днём.\n4. **Единицы шумят:** каждая единица, которую ты не потратил к концу своего Дня, приводит ходячего на твой тайл. Единицу удобно потратить на Переход.\n\n**Усилие [пробное правило]:** можно сложить значения ровно двух кубиков в одно действие (например, 2 + 3 = 5 для Разведки). За это +1 Голод.\n\n### 3.2 Что можно делать Днём\n\n| Действие | Кубик | Что происходит |\n|---|---|---|\n| Переход | любой | Шагни на соседний тайл через открытый край. Через заштрихованный край пройти нельзя. |\n| Рывок | 5+ | Шагни на 2 тайла. +1 Жажда. |\n| Открыть тайл | любой | Шаг за открытый край туда, где тайла ещё нет (см. ниже). |\n| Разведка | 5+ | Посмотри тайл за открытым краем, не заходя туда (см. ниже). |\n| Обыск | ≥ порога тайла | Возьми 1 ресурс по типу лута, нажми «−» на счётчике запаса тайла. Запас 0 — обыскивать нечего. |\n| Бой | ≥ порога врага | Убей врага на своём тайле: ходячий 2+, бегун 4+, бронированный 6. Он становится трупом. Первый бой за День: +1 Голод. |\n| Разделать труп | любой | Убери труп насовсем, иначе ночью он встанет. |\n| Баррикада | любой | Только в Лагере. Положи жетон баррикады: ночью он отменяет 1 удар. Без материала баррикада держится одну ночь, с материалом — пока её не пробьют. |\n| Лечение | 4+ и медикамент | −2 Заражение. Можно лечить себя или другого на том же тайле. |\n| Отдых | 2 любых | −1 Изменение. |\n| Помочь | любой | Отдай кубик игроку на том же тайле. |\n| Отчаянно | — | Раз за День: возьми и брось 2 дополнительных кубика. +1 Изменение. |\n\n**Есть и пить можно в любой момент:** еда −2 Голод, вода −2 Жажда.\n\n**Тяжёлая местность:** зайти на искажённый тайл или в заросли — +1 Жажда.\n\n### 3.3 Открыть новый тайл\n1. Стоишь у открытого края, за которым пусто.\n2. Тяни случайный тайл из мешка «Тайлы города», клади обычной (светлой) стороной вверх.\n3. Поверни его так, чтобы к тебе смотрел открытый край. Счётчик запаса на тайле уже выставлен.\n4. Зайди на тайл и поставь на него ходячих по числу «Угроза».\n5. **Засада:** каждый враг на только что открытом тайле сразу бьёт тебя (удар = +1 Заражение).\n\n**Разведка** (кубик 5+) делает то же самое, но без захода: ты кладёшь тайл и врагов, засады нет. Можешь вместо этого вернуть тайл в мешок, если он тебе не нравится.\n\n### 3.4 Лут\n- **Припасы:** еда или вода на выбор. «Припасы (вода)» — только вода.\n- **Медицина:** медикамент.\n- **Материалы:** материал (для баррикад).\n- **Техника:** техника. [ЗАГЛУШКА: пока ни на что не тратится, понадобится для финалов]\n- **Редкое / мутаген:** мутаген. Использовать в любой момент: +2 кубика на этот День, +2 Заражение. [ЗАГЛУШКА мутаций]\n- «×2» — два ресурса за обыск, «любой ресурс» — на выбор.\n\nНайденное держи у себя (рядом с планшетом) или положи в Лагере в общий запас.\n\n### 3.5 Сумерки\n- **В Лагере:** каждый ест 1 еду и пьёт 1 воду из общего или своего запаса. Не поел — +1 Голод, не попил — +1 Жажда. Не хватает на всех — решайте вслух, кому.\n- **Вне Лагеря:** смотри Ночлег своего тайла.\n  - Укрытие: указанное на тайле восстановление, ночью на тебя не нападают.\n  - Открытое: +1 Голод, +1 Жажда.\n  - Опасное (в том числе любой искажённый тайл): +1 Голод, +1 Жажда и эффект тайла.\n\n### 3.6 Ночь (по порядку)\n1. **Событие.** Открой верхнюю карту из текущей колоды ночей и выполни её.\n   «Разлом: тип» — переверни ближайший к Лагерю тайл с этим типом искажения (тип подписан внизу тайла), который ещё не перевёрнут. Поставь на него чёрный маркер на ступень I и нажми «−» на счётчике запаса (на искажённой стороне запас меньше на 1). Подходящего тайла нет — Сдвиг +1.\n2. **Сдвиг +1.**\n3. **Искажённые тайлы растут.** Маркер на каждом перевёрнутом тайле +1 ступень (максимум III). Ступени накапливаются: на II работают и I, и II. Если ступень выпускает врага — поставь его.\n4. **Трупы встают.** Переверни все трупы на «Восставших». Восставший умирает от любого кубика 2+ и снова становится трупом.\n5. **Враги растут** (начиная со 2-й ночи). Ходячий переворачивается в бегуна, бегуна замени бронированным.\n6. **Враги идут.** Каждый враг делает шаг к ближайшему выжившему через открытые края. Бегун делает 2 шага.\n7. **Нападение.** Каждый враг на тайле с выжившим бьёт: ходячий, бегун и восставший — 1 удар, бронированный — 2 удара. **Удар = +1 Заражение** (укус). Удары распределяют сами выжившие на этом тайле. В Лагере каждая баррикада отменяет 1 удар. В Укрытии вне Лагеря нападения нет.\n8. Маркер ночи +1. После 9-й ночи — эвакуация, конец игры.\n\n## 4. Шкалы\nНа планшете три шкалы: **Голод, Жажда, Заражение**. Каждая от 0 до 5, и пока она не полна, ничего не происходит. Если шкала на 5 и нужно добавить ещё — **переполнение**. Шкала остаётся на 5, и каждое следующее деление вызывает переполнение снова.\n\n| Шкала | Переполнение |\n|---|---|\n| Голод | в следующий День бросаешь на 2 кубика меньше |\n| Жажда | теряешь сознание: следующий День пропускаешь, ночью лежишь на тайле без защиты |\n| Заражение | шрам: закрой одну ячейку кубика навсегда; шкала падает до 2 |\n\n**Изменение** (0–10) растёт от Отчаянно, событий и эффектов тайлов. Если оно на 10 и нужно добавить ещё — тайно возьми карту Срыва себе в руку. Теперь у тебя новая цель. Карту никому не показывай (кроме карты «Мост»).\n\n## 5. Смерть и конец игры\n- Если закрыты все 6 ячеек кубиков — выживший погибает. [ЗАГЛУШКА: может ли игрок вернуться новым выжившим]\n- После 9-й ночи спасаются все, кто стоит в Лагере.\n- Обычный выживший побеждает, если спасся. Игрок с картой Срыва побеждает, только если выполнил цель на карте.\n\n## 6. Что записывать на тесте\n- На какой ночи стало по-настоящему страшно.\n- Какие шкалы переполнялись, а какие не сдвинулись ни разу.\n- Как часто пользовались Усилием и не стало ли слишком легко.\n- Сколько минут занимает одна Ночь.\n- Какие тайлы и события оказались скучными.\n",
+   "GMNotes": "",
+   "ColorDiffuse": {
+    "r": 1,
+    "g": 1,
+    "b": 1
+   },
+   "Locked": false,
+   "Grid": false,
+   "Snap": true,
+   "Autoraise": true,
+   "Sticky": true,
+   "Tooltip": true,
+   "GridProjection": false,
+   "Hands": false,
+   "LuaScript": "",
+   "LuaScriptState": ""
+  }
+ ]
+}

@@ -1,6 +1,7 @@
--- Тест гекса: выкладывает пробный шестиугольный тайл и сообщает его размеры (запуск 1)
+-- Тест гекса: выкладывает пробный шестиугольный тайл и сообщает его размеры (запуск 2)
 local o = spawnObject({type = "Custom_Tile", position = {0, 3, -4}, rotation = {0, 180, 0}, scale = {3, 1, 3}})
 o.setCustomObject({image = "file:///C:/NaGrani/images/hex_test.png", type = 1, thickness = 0.2, stretch = true})
+o = o.reload()
 o.setName("Тест гекса")
 Wait.time(function()
   local t = getObjectFromGUID(o.getGUID()) or o

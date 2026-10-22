@@ -4,14 +4,14 @@ local TERRAIN = {"4d3c1a", "ca264e", "18b8ff", "25165e", "3031d0", "bb3b93", "1d
 local STACK_POS = {-14, 7}
 local START_LEVEL1 = 2
 local CAMP = "a5cd68"
-local TABLE = "cbb93e"
-local SHARED = "7ec75f"
+local TABLE = "552df6"
+local SHARED = "2941f3"
 local SHARED_W = 33.3
 local TABLE_SIZE = 140
 local NIGHT_DECKS = {
   {guid = "1fac61", name = "Ночи 1–3"},
-  {guid = "49dbcd",   name = "Ночи 4–6"},
-  {guid = "2025e0",  name = "Ночи 7–9"},
+  {guid = "5c882b",   name = "Ночи 4–6"},
+  {guid = "daed60",  name = "Ночи 7–9"},
 }
 local OUT_POS = {33, 1.5, 0}
 local BOARD_JSON = [==[{"GUID": "", "Name": "Custom_Board", "Transform": {"posX": 0, "posY": 1, "posZ": 0, "rotX": 0, "rotY": 180, "rotZ": 0, "scaleX": 0.394, "scaleY": 0.394, "scaleZ": 0.394}, "Nickname": "Планшет игрока", "Description": "", "GMNotes": "", "ColorDiffuse": {"r": 1, "g": 1, "b": 1}, "Locked": false, "Grid": false, "Snap": true, "Autoraise": true, "Sticky": true, "Tooltip": true, "GridProjection": false, "Hands": false, "LuaScript": "", "LuaScriptState": "", "CustomImage": {"ImageURL": "file:///C:/NaGrani/images/player_board.png", "ImageSecondaryURL": "", "ImageScalar": 1.0, "WidthScale": 0.0}}]==]

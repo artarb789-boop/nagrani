@@ -137,13 +137,13 @@ def deck(deck_key, cd, cards, transform, nick, desc=""):
     return obj("Deck", transform, nick, desc, HideWhenFaceDown=True, SidewaysCard=False,
                DeckIDs=[c["CardID"] for c in cards], CustomDeck={str(deck_key): cd}, ContainedObjects=cards)
 
-ev_cd = {"FaceURL": url("events_front.png"), "BackURL": url("events_back.png"), "NumWidth": 7, "NumHeight": 4,
+ev_cd = {"FaceURL": url("events_front.png"), "BackURL": url("events_back.png"), "NumWidth": 7, "NumHeight": 5,
          "BackIsHidden": True, "UniqueBack": True, "Type": 0}
 layers = ["Ранние", "Средние", "Поздние", "Последствия"]
 layer_pos = [(21, 12), (24, 12), (27, 12), (24, 6.5)]
 layer_guids = {}
 for li, layer in enumerate(layers):
-    cards = [card(2, i, ev_cd, ev[1], f"{layer} · Мир: {ev[4]} · Выживание: {ev[5]}")
+    cards = [card(2, i, ev_cd, ev[1], (f"{layer} · УГРОЗА · Отвести: {ev[4]} · Не отвели: {ev[5]}" if ev[6] == "УГРОЗА" else f"{layer} · Мир: {ev[4]} · Выживание: {ev[5]}"))
              for i, ev in enumerate(EVENTS) if ev[2] == layer]
     x, z = layer_pos[li]
     d = deck(2, ev_cd, cards, tf(x, 1.2, z, rz=180, s=1.0), f"События: {layer}",
@@ -427,7 +427,7 @@ XML_UI = f'''<Panel id="setup" width="560" height="250" rectAlignment="MiddleCen
 </Panel>'''
 
 save = {
-    "SaveName": "На грани — пробник 0.7", "GameMode": "На грани", "Gravity": 0.5, "PlayArea": 1.0,
+    "SaveName": "На грани — пробник 0.8", "GameMode": "На грани", "Gravity": 0.5, "PlayArea": 1.0,
     "Date": "", "Table": "Table_None", "TableURL": "", "Sky": "",
     "Note": rules, "Rules": "", "XmlUI": XML_UI,
     "LuaScript": GLOBAL_LUA, "LuaScriptState": "",

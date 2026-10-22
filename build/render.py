@@ -4,7 +4,7 @@ import html, sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 sys.path.insert(0, str(Path(__file__).parent))
-from data import TILES, EVENTS, SRYV, DISTORTION_COLOR, LAYER_COLOR, HEX_TILES, RIFT_MEMO, LEVEL_COLOR, CHARACTERS
+from data import TILES, EVENTS, SRYV, DISTORTION_COLOR, LAYER_COLOR, RIFT_ORDER, HEX_TILES, RIFT_MEMO, LEVEL_COLOR, CHARACTERS
 
 OUT = Path(__file__).parent.parent / "images"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -123,26 +123,35 @@ def tile_back(t):
 # ---------- события ----------
 CW, CH = 400, 560
 def event_front(ev):
-    n, name, layer, rifts, world, surv, choice = ev
+    n, name, layer, rifts, world, surv, kind = ev
     lc = LAYER_COLOR[layer]
     rift = ""
     if rifts:
-        rift = "<div style='margin-top:14px;font-size:20px'>" + " ".join(
+        rift = "<div style='margin-top:12px;font-size:19px'>" + " ".join(
             f"<span style='display:inline-block;padding:4px 12px;border-radius:999px;border:2px solid {DISTORTION_COLOR[r]};color:{DISTORTION_COLOR[r]};margin:0 6px 6px 0'>Разлом: {e(r)}</span>" for r in rifts) + "</div>"
-    ch = f"<div style='position:absolute;right:26px;top:26px;background:#E0B84A;color:#2A2000;font-weight:700;font-size:15px;padding:4px 10px;border-radius:6px'>ВЫБОР</div>" if choice else ""
-    def block(title, txt):
+    badge = ""
+    if kind:
+        bc = "#E0B84A" if kind == "ВЫБОР" else "#E24B4A"
+        badge = f"<div style='position:absolute;right:24px;top:24px;background:{bc};color:#1A1000;font-weight:700;font-size:15px;padding:4px 10px;border-radius:6px'>{kind}</div>"
+    def block(title, txt, col=None):
         if txt in ("—", ""): return ""
-        return (f"<div style='margin-top:16px'><div style='font-size:14px;text-transform:uppercase;letter-spacing:.1em' class='muted'>{title}</div>"
-                f"<div style='font-size:21px;line-height:1.3;margin-top:4px'>{e(txt)}</div></div>")
-    return f"""<div style='position:absolute;inset:0;background:#2E2B25'></div>
+        tc = f"color:{col}" if col else ""
+        return (f"<div style='margin-top:14px'><div style='font-size:14px;text-transform:uppercase;letter-spacing:.1em;{tc}' class='muted'>{title}</div>"
+                f"<div style='font-size:20px;line-height:1.28;margin-top:4px'>{e(txt)}</div></div>")
+    if kind == "УГРОЗА":
+        blocks = (block("Положи на поле Угроз · отвести за 2 ночи", world, "#F0997B")
+                  + block("Не отвели", surv, "#E24B4A"))
+    else:
+        blocks = block("Мир", world) + block("Выживание", surv)
+    return f"""<div style='position:absolute;inset:0;background:{"#33221F" if kind == "УГРОЗА" else "#2E2B25"}'></div>
       <div style='position:absolute;left:0;right:0;top:0;height:12px;background:{lc}'></div>
-      {ch}
-      <div style='position:absolute;inset:34px 28px'>
+      {badge}
+      <div style='position:absolute;inset:32px 26px'>
         <div style='font-size:15px;text-transform:uppercase;letter-spacing:.12em;color:{lc}'>Ночь · {e(layer)}</div>
-        <div class='h' style='font-size:34px;line-height:1.08;margin-top:10px;padding-right:{80 if choice else 0}px'>{e(name)}</div>
-        {rift}{block('Мир', world)}{block('Выживание', surv)}
+        <div class='h' style='font-size:32px;line-height:1.08;margin-top:10px;padding-right:{96 if kind else 0}px'>{e(name)}</div>
+        {rift}{blocks}
       </div>
-      <div style='position:absolute;bottom:20px;left:28px' class='muted'>#{n}</div>"""
+      <div style='position:absolute;bottom:18px;left:26px' class='muted'>#{n}</div>"""
 
 def event_back(ev):
     layer = ev[2]
@@ -343,29 +352,43 @@ def player_board():
 
 def shared_board():
     W, H = 1600, 900
-    nights = "".join(f"<div style='flex:1;height:90px;border-radius:8px;background:{'#3B4A2E' if i<=3 else ('#5A4A22' if i<=6 else '#5A2620')};display:flex;align-items:center;justify-content:center;font-size:34px' class='h'>{i}</div>" for i in range(1, 10))
-    shift = "".join(f"<div style='flex:1;height:64px;border-radius:6px;background:#33302A;display:flex;align-items:center;justify-content:center;font-size:22px;color:#CFC8B6'>{i}</div>" for i in range(16))
-    steps = ["Событие: жетон разлома на ближайший к Лагерю чистый тайл этого типа", "Сдвиг +1", "Все разломы +1 ступень (до III)",
-             "Трупы встают: труп → Восставший", "Монстры идут к ближайшему выжившему: шагов = Скорость",
-             "Нападение: каждый монстр −Урон Здоровья", "Разломы типа с карты выпускают монстров: I ходячий, II бегун, III бронированный. Новые стоят до следующей ночи",
-             "Ночь +1"]
-    st = "".join(f"<div style='font-size:21px;padding:5px 0'><b style='color:#C8E04A'>{i}.</b> {s}</div>" for i, s in enumerate(steps, 1))
-    body = f"""<div style='width:{W}px;height:{H}px;background:#211F1B;padding:34px;display:grid;grid-template-columns:1fr 560px;gap:34px'>
+    nights = "".join(f"<div style='flex:1;height:78px;border-radius:8px;background:{'#3B4A2E' if i<=3 else ('#5A4A22' if i<=6 else '#5A2620')};display:flex;align-items:center;justify-content:center;font-size:32px' class='h'>{i}</div>" for i in range(1, 10))
+    TH = {3: "новые сразу шаг", 6: "+ тип по кругу", 9: "Лагерь +1 Изм.", 10: "ПРОВАЛ"}
+    def scell(i):
+        bg = "#33302A" if i < 3 else ("#4A3426" if i < 6 else ("#5A2E22" if i < 10 else "#7A1E1A"))
+        mark = f"<div style='position:absolute;top:70px;left:-8px;right:-8px;text-align:center;font-size:13px;line-height:1.1;color:#F0997B'>{TH[i]}</div>" if i in TH else ""
+        border = "border:3px solid #F0997B;" if i in TH else ""
+        return f"<div style='position:relative;flex:1;height:62px;border-radius:6px;background:{bg};{border}display:flex;align-items:center;justify-content:center;font-size:24px;color:#CFC8B6'>{i}{mark}</div>"
+    shift = "".join(scell(i) for i in range(11))
+    order = " → ".join(f"<span style='color:{DISTORTION_COLOR[r]}'>{r}</span>" for r in RIFT_ORDER) + " → …"
+    slot = lambda t: (f"<div style='width:150px;height:205px;border:2px dashed #E24B4A;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:8px'>"
+                      f"<div style='font-size:15px;color:#F0997B'>{t}</div></div>")
+    steps = ["Событие. Угрозу положи на поле Угроз (отсчёт 2)", "Угрозы: отсчёт −1 (кроме новой); на 0 — срабатывает",
+             "Все разломы +1 ступень (до III)", "Трупы встают: труп → Восставший",
+             "Монстры идут к ближайшему выжившему: шагов = Скорость", "Нападение: каждый монстр −Урон Здоровья",
+             "Разломы типа с карты выпускают: I ходячий, II бегун, III бронированный", "Ночь +1"]
+    st = "".join(f"<div style='font-size:20px;padding:4px 0;line-height:1.25'><b style='color:#C8E04A'>{i}.</b> {s}</div>" for i, s in enumerate(steps, 1))
+    body = f"""<div style='width:{W}px;height:{H}px;background:#211F1B;padding:30px;display:grid;grid-template-columns:1fr 540px;gap:30px'>
       <div>
-        <div class='h' style='font-size:52px'>НА ГРАНИ</div><div class='muted' style='font-size:20px'>пробник 0.7</div>
-        <div class='h' style='font-size:22px;letter-spacing:.1em;margin:28px 0 10px'>НОЧЬ · эвакуация после 9-й</div>
+        <div style='display:flex;align-items:baseline;gap:18px'><div class='h' style='font-size:46px'>НА ГРАНИ</div><div class='muted' style='font-size:18px'>пробник 0.8</div></div>
+        <div class='h' style='font-size:20px;letter-spacing:.1em;margin:18px 0 8px'>НОЧЬ · эвакуация после 9-й</div>
         <div style='display:flex;gap:8px'>{nights}</div>
-        <div class='h' style='font-size:22px;letter-spacing:.1em;margin:28px 0 10px'>СДВИГ</div>
-        <div style='display:flex;gap:5px'>{shift}</div>
-        <div style='display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px'>
-          <div style='height:200px;border:2px dashed #5A8EC8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#8CB4E8'>Общая вода</div>
-          <div style='height:200px;border:2px dashed #C88A5A;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#E8B48C'>Общая еда</div>
+        <div class='h' style='font-size:20px;letter-spacing:.1em;margin:22px 0 8px'>СДВИГ <span style='font-weight:400;font-size:15px;color:#A7A293'>· растёт от упущенного: Угроза +2, разлом без тайла +1, гибель выжившего +1</span></div>
+        <div style='display:flex;gap:6px'>{shift}</div>
+        <div style='font-size:15px;margin-top:56px' class='muted'>Тип по кругу (Сдвиг 6+): {order}</div>
+        <div style='display:flex;gap:22px;margin-top:16px;align-items:flex-end'>
+          <div><div class='h' style='font-size:20px;letter-spacing:.1em;color:#F0997B;margin-bottom:8px'>УГРОЗЫ</div>
+            <div style='display:flex;gap:14px'>{slot("осталось 2")}{slot("осталось 1")}</div></div>
+          <div style='flex:1;display:grid;grid-template-rows:1fr 1fr;gap:12px;height:205px'>
+            <div style='border:2px dashed #5A8EC8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#8CB4E8'>Общая вода</div>
+            <div style='border:2px dashed #C88A5A;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#E8B48C'>Общая еда</div>
+          </div>
         </div>
       </div>
-      <div style='background:#1A1916;border-radius:12px;padding:22px 26px'>
-        <div class='h' style='font-size:26px;margin-bottom:6px'>Раунд</div>
-        <div style='font-size:21px;line-height:1.35'><b>День:</b> бросок, потом по кругу по одному кубику.<br><b>Сумерки:</b> в Лагере 1 еда + 1 вода каждому (нет → +1 Голод/+1 Жажда); вне Лагеря — Ночлег тайла.</div>
-        <div class='h' style='font-size:26px;margin:16px 0 6px'>Ночь</div>{st}
+      <div style='background:#1A1916;border-radius:12px;padding:20px 24px'>
+        <div class='h' style='font-size:24px;margin-bottom:6px'>Раунд</div>
+        <div style='font-size:19px;line-height:1.35'><b>День:</b> бросок, потом по кругу по одному кубику.<br><b>Сумерки:</b> в Лагере 1 еда + 1 вода каждому (нет → +1 Голод/+1 Жажда); вне Лагеря — Ночлег тайла.</div>
+        <div class='h' style='font-size:24px;margin:14px 0 4px'>Ночь</div>{st}
       </div></div>"""
     return page(body, W, H), W, H
 
@@ -375,8 +398,8 @@ def main():
         shoot(pw, "tiles_front.png", page(grid([tile_front(t) for t in TILES], 5, 4, T, T), 5*T, 4*T), 5*T, 4*T)
         shoot(pw, "tiles_back.png", page(grid([tile_back(t) for t in TILES], 5, 4, T, T), 5*T, 4*T), 5*T, 4*T)
         # события 7x4
-        shoot(pw, "events_front.png", page(grid([event_front(x) for x in EVENTS], 7, 4, CW, CH), 7*CW, 4*CH), 7*CW, 4*CH)
-        shoot(pw, "events_back.png", page(grid([event_back(x) for x in EVENTS], 7, 4, CW, CH), 7*CW, 4*CH), 7*CW, 4*CH)
+        shoot(pw, "events_front.png", page(grid([event_front(x) for x in EVENTS], 7, 5, CW, CH), 7*CW, 5*CH), 7*CW, 5*CH)
+        shoot(pw, "events_back.png", page(grid([event_back(x) for x in EVENTS], 7, 5, CW, CH), 7*CW, 5*CH), 7*CW, 5*CH)
         # срыв 5x2
         shoot(pw, "sryv_front.png", page(grid([sryv_front(c) for c in SRYV], 5, 2, CW, CH), 5*CW, 2*CH), 5*CW, 2*CH)
         shoot(pw, "sryv_back.png", page(sryv_back().join(["<div class='cell' style='width:400px;height:560px'>", "</div>"]), CW, CH), CW, CH)

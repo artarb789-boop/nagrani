@@ -22,9 +22,9 @@ local BOARD_W = 17.45
 local BOARD_H = 7.2
 -- Кубики: смещение по x от центра планшета, над верхним краем
 local DICE_X = {-4.5, -3.5, -2.5, -1.5, -0.5, 0.5}
--- Маркеры: доли ширины и высоты планшета от центра (+x вправо, +z к верху картинки)
+-- Маркеры: смещения от центра планшета, замерены по раскладке в TTS
 -- Голод 0, Жажда 0, Здоровье 5, Фокус 5, Изменение 0
-local MARK_F = {{-0.348, 0.104}, {-0.348, -0.004}, {-0.1295, -0.114}, {-0.1295, -0.222}, {-0.45, -0.3945}}
+local MARK_OFF = {{-5.57, 0.70}, {-5.56, -0.02}, {-2.05, -0.77}, {-2.05, -1.49}, {-7.19, -2.58}}
 local COLORS = {"White", "Red", "Blue", "Green", "Yellow"}
 local MARKERS = {
   {name = "Голод",     color = {0.93, 0.55, 0.2}},
@@ -131,7 +131,7 @@ function piecePositions(o)
   local size = {x = BOARD_W, z = BOARD_H}
   local dice, marks = {}, {}
   for i, dx in ipairs(DICE_X) do dice[i] = {p.x + dx, 2, p.z + size.z / 2 + 1.4} end
-  for m, f in ipairs(MARK_F) do marks[m] = {p.x + f[1] * size.x, 2, p.z + f[2] * size.z} end
+  for m, f in ipairs(MARK_OFF) do marks[m] = {p.x + f[1], 2, p.z + f[2]} end
   return dice, marks
 end
 

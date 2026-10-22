@@ -228,6 +228,7 @@ GLOBAL_LUA = r'''
 -- На грани: подготовка партии
 local TERRAIN = {__TERRAIN__}
 local STACK_POS = {__STACK_X__, __STACK_Z__}
+local START_LEVEL1 = 2
 local CAMP = "__CAMP__"
 local TABLE = "__TABLE__"
 local SHARED = "__SHARED__"
@@ -315,6 +316,14 @@ function stackTerrain()
     local j = math.random(i)
     list[i], list[j] = list[j], list[i]
   end
+  -- Первые START_LEVEL1 тайлов сверху стопки — всегда уровня I
+  local top, rest = {}, {}
+  for _, o in ipairs(list) do
+    local ok, d = pcall(function() return JSON.decode(o.getGMNotes()) end)
+    if #top < START_LEVEL1 and ok and d ~= nil and d.level == 1 then table.insert(top, o) else table.insert(rest, o) end
+  end
+  list = rest
+  for _, o in ipairs(top) do table.insert(list, o) end
   for i, o in ipairs(list) do
     o.setRotation({0, 180, 180})
     o.setPosition({STACK_POS[1], 1.2 + i * 0.3, STACK_POS[2]})
